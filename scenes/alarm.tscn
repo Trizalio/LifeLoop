@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/circle.shader" type="Shader" id=1]
+[ext_resource path="res://scenes/alarm.gd" type="Script" id=2]
+[ext_resource path="res://art/alarm_placeholder.png" type="Texture" id=3]
+[ext_resource path="res://art/audio/alarm.wav" type="AudioStream" id=4]
+[ext_resource path="res://scenes/glow.shader" type="Shader" id=5]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/selected_color = Color( 0.121569, 0.121569, 0.121569, 1 )
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 5 )
+shader_param/selected_glow = Color( 1, 0.87451, 0.501961, 1 )
+shader_param/max_steps = 5
+shader_param/shift_per_step = 1.0
+shader_param/pulse_frequency = 5.0
+shader_param/power = 1.0
+
+[node name="alarm" type="Node"]
+script = ExtResource( 2 )
+
+[node name="background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0666667, 0.0666667, 0.0666667, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="circle" type="Sprite" parent="."]
+material = SubResource( 1 )
+position = Vector2( 392.001, 381.407 )
+scale = Vector2( 4.84965, 1.67948 )
+texture = ExtResource( 3 )
+
+[node name="alarm" type="Sprite" parent="."]
+material = SubResource( 2 )
+position = Vector2( 392.001, 294.531 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 3 )
+
+[node name="sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="."]
+material = SubResource( 2 )
+margin_left = 347.738
+margin_top = 488.849
+margin_right = 423.738
+margin_bottom = 502.849
+text = "Press space"
+__meta__ = {
+"_edit_use_anchors_": false
+}

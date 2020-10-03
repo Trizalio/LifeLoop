@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scripts/city_player.gd" type="Script" id=1]
 [ext_resource path="res://art/buildings/heal.png" type="Texture" id=2]
@@ -10,8 +10,9 @@
 [ext_resource path="res://art/buildings/bar.png" type="Texture" id=8]
 [ext_resource path="res://art/buildings/coin.png" type="Texture" id=9]
 [ext_resource path="res://scenes/glow.shader" type="Shader" id=10]
+[ext_resource path="res://art/buildings/building.PNG" type="Texture" id=11]
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
@@ -29,15 +30,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="ShaderMaterial" id=4]
-shader = ExtResource( 10 )
-shader_param/selected_glow = Color( 1, 0.866667, 0, 1 )
-shader_param/max_steps = 4
-shader_param/shift_per_step = 1.0
-shader_param/pulse_frequency = 5.0
-shader_param/power = 0.2
-
-[sub_resource type="ShaderMaterial" id=5]
+[sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 10 )
 shader_param/selected_glow = Color( 1, 0.866667, 0, 1 )
 shader_param/max_steps = 4
@@ -46,6 +39,14 @@ shader_param/pulse_frequency = 5.0
 shader_param/power = 0.2
 
 [sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 10 )
+shader_param/selected_glow = Color( 1, 0.866667, 0, 1 )
+shader_param/max_steps = 4
+shader_param/shift_per_step = 1.0
+shader_param/pulse_frequency = 5.0
+shader_param/power = 0.2
+
+[sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 10 )
 shader_param/selected_glow = Color( 1, 0.866667, 0, 1 )
 shader_param/max_steps = 4
@@ -63,6 +64,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 50
+custom_constants/margin_top = 40
+custom_constants/margin_left = 50
+custom_constants/margin_bottom = 30
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="MarginContainer"]
+margin_left = 50.0
+margin_top = 40.0
+margin_right = 750.0
+margin_bottom = 570.0
+color = Color( 0.121569, 0.121569, 0.121569, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="bars" parent="." instance=ExtResource( 7 )]
 margin_top = -0.840881
 margin_bottom = -0.840881
@@ -72,16 +94,47 @@ margin_bottom = -0.840881
 [node name="Roads" type="Node2D" parent="Map"]
 
 [node name="ColorRect" type="ColorRect" parent="Map/Roads"]
-margin_left = 400.0
-margin_top = 150.0
-margin_right = 420.0
-margin_bottom = 310.0
+margin_left = 189.0
+margin_top = 363.0
+margin_right = 209.0
+margin_bottom = 528.0
+color = Color( 0.32549, 0.32549, 0.32549, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect3" type="ColorRect" parent="Map/Roads"]
+margin_left = 405.0
+margin_top = 147.0
+margin_right = 425.0
+margin_bottom = 536.0
+color = Color( 0.32549, 0.32549, 0.32549, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect7" type="ColorRect" parent="Map/Roads"]
+margin_left = 259.0
+margin_top = 149.0
+margin_right = 279.0
+margin_bottom = 401.0
+color = Color( 0.32549, 0.32549, 0.32549, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect4" type="ColorRect" parent="Map/Roads"]
+margin_left = 584.0
+margin_top = 156.0
+margin_right = 604.0
+margin_bottom = 533.0
 color = Color( 0.32549, 0.32549, 0.32549, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ColorRect2" type="ColorRect" parent="Map/Roads"]
+visible = false
 margin_left = 640.0
 margin_top = 150.0
 margin_right = 660.0
@@ -92,8 +145,32 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ColorRect5" type="ColorRect" parent="Map/Roads"]
+margin_left = 425.362
+margin_top = 311.301
+margin_right = 445.362
+margin_bottom = 704.301
+rect_rotation = 90.0
+rect_pivot_offset = Vector2( 41.8025, 123.549 )
+color = Color( 0.32549, 0.32549, 0.32549, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect6" type="ColorRect" parent="Map/Roads"]
+margin_left = 439.649
+margin_top = 60.4918
+margin_right = 459.649
+margin_bottom = 453.492
+rect_rotation = 90.0
+rect_pivot_offset = Vector2( 41.8025, 123.549 )
+color = Color( 0.32549, 0.32549, 0.32549, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Player" type="Node2D" parent="Map"]
-position = Vector2( 622.035, 160.181 )
+position = Vector2( 594.363, 511.217 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
@@ -102,23 +179,220 @@ __meta__ = {
 [node name="Sprite" type="AnimatedSprite" parent="Map/Player"]
 modulate = Color( 0.478431, 0.498039, 0.576471, 1 )
 material = ExtResource( 6 )
-scale = Vector2( 0.5, 0.5 )
-frames = SubResource( 2 )
+scale = Vector2( 0.7, 0.7 )
+frames = SubResource( 1 )
 animation = "up"
 
 [node name="buildings" type="Node2D" parent="Map"]
 
+[node name="building" type="Sprite" parent="Map/buildings"]
+visible = false
+material = SubResource( 2 )
+position = Vector2( 153.723, 132.792 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 11 )
+
+[node name="building2" type="Sprite" parent="Map/buildings"]
+material = SubResource( 2 )
+position = Vector2( 428.343, 72.4712 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 11 )
+
+[node name="building8" type="Sprite" parent="Map/buildings"]
+material = SubResource( 2 )
+position = Vector2( 131.499, 131.205 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 11 )
+
+[node name="building12" type="Sprite" parent="Map/buildings"]
+material = SubResource( 2 )
+position = Vector2( 275.953, 69.2963 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 11 )
+
+[node name="building9" type="Sprite" parent="Map/buildings"]
+material = SubResource( 2 )
+position = Vector2( 338.465, 482.561 )
+scale = Vector2( 0.276647, 0.276647 )
+texture = ExtResource( 11 )
+offset = Vector2( -32.3137, -30.6442 )
+
+[node name="building13" type="Sprite" parent="Map/buildings"]
+material = SubResource( 2 )
+position = Vector2( 338.465, 482.561 )
+scale = Vector2( 0.276647, 0.276647 )
+texture = ExtResource( 11 )
+offset = Vector2( -32.3137, -99.5001 )
+
+[node name="building24" type="Sprite" parent="Map/buildings"]
+material = SubResource( 2 )
+position = Vector2( 274.969, 501.61 )
+scale = Vector2( 0.276647, 0.276647 )
+texture = ExtResource( 11 )
+offset = Vector2( -32.3137, -99.5001 )
+
+[node name="building25" type="Sprite" parent="Map/buildings"]
+material = SubResource( 2 )
+position = Vector2( 676.581, 96.8228 )
+scale = Vector2( 0.276647, 0.276647 )
+texture = ExtResource( 11 )
+offset = Vector2( -32.3137, -99.5001 )
+
+[node name="building22" type="Sprite" parent="Map/buildings"]
+material = SubResource( 2 )
+position = Vector2( 144.802, 388.905 )
+scale = Vector2( 0.276647, 0.276647 )
+texture = ExtResource( 11 )
+offset = Vector2( -32.3137, -30.6442 )
+
+[node name="building23" type="Sprite" parent="Map/buildings"]
+material = SubResource( 2 )
+position = Vector2( 144.802, 388.905 )
+scale = Vector2( 0.276647, 0.276647 )
+texture = ExtResource( 11 )
+offset = Vector2( -32.3137, -99.5001 )
+
+[node name="building20" type="Sprite" parent="Map/buildings"]
+material = SubResource( 2 )
+position = Vector2( 73.954, 275.658 )
+scale = Vector2( 0.276647, 0.276647 )
+texture = ExtResource( 11 )
+
+[node name="building21" type="Sprite" parent="Map/buildings"]
+material = SubResource( 2 )
+position = Vector2( 73.954, 256.61 )
+scale = Vector2( 0.276647, 0.276647 )
+texture = ExtResource( 11 )
+
+[node name="building18" type="Sprite" parent="Map/buildings"]
+material = SubResource( 2 )
+position = Vector2( 561.286, 88.3452 )
+scale = Vector2( 0.276647, 0.276647 )
+texture = ExtResource( 11 )
+
+[node name="building19" type="Sprite" parent="Map/buildings"]
+material = SubResource( 2 )
+position = Vector2( 561.286, 67.709 )
+scale = Vector2( 0.276647, 0.276647 )
+texture = ExtResource( 11 )
+
+[node name="building14" type="Sprite" parent="Map/buildings"]
+material = SubResource( 2 )
+position = Vector2( 534.3, 350.266 )
+scale = Vector2( 0.276647, 0.276647 )
+texture = ExtResource( 11 )
+
+[node name="building15" type="Sprite" parent="Map/buildings"]
+material = SubResource( 2 )
+position = Vector2( 534.3, 331.218 )
+scale = Vector2( 0.276647, 0.276647 )
+texture = ExtResource( 11 )
+
+[node name="building16" type="Sprite" parent="Map/buildings"]
+material = SubResource( 2 )
+position = Vector2( 472.392, 350.266 )
+scale = Vector2( 0.276647, 0.276647 )
+texture = ExtResource( 11 )
+
+[node name="building17" type="Sprite" parent="Map/buildings"]
+material = SubResource( 2 )
+position = Vector2( 470.804, 331.218 )
+scale = Vector2( 0.276647, 0.276647 )
+texture = ExtResource( 11 )
+
+[node name="building3" type="Sprite" parent="Map/buildings"]
+material = SubResource( 2 )
+position = Vector2( 185.471, 269.309 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 11 )
+
+[node name="building4" type="Sprite" parent="Map/buildings"]
+material = SubResource( 2 )
+position = Vector2( 685.502, 324.868 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 11 )
+
+[node name="building11" type="Sprite" parent="Map/buildings"]
+material = SubResource( 2 )
+position = Vector2( 688.677, 159.778 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 11 )
+
+[node name="building10" type="Sprite" parent="Map/buildings"]
+material = SubResource( 2 )
+position = Vector2( 688.677, 475.671 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 11 )
+
+[node name="building5" type="Sprite" parent="Map/buildings"]
+material = SubResource( 2 )
+position = Vector2( 504.538, 231.211 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 11 )
+
+[node name="building6" type="Sprite" parent="Map/buildings"]
+material = SubResource( 2 )
+position = Vector2( 496.602, 477.258 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 11 )
+
+[node name="building7" type="Sprite" parent="Map/buildings"]
+material = SubResource( 2 )
+position = Vector2( 110.863, 466.147 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 11 )
+
+[node name="ColorRect3" type="ColorRect" parent="Map/buildings"]
+margin_left = 291.301
+margin_top = 191.287
+margin_right = 381.301
+margin_bottom = 373.287
+color = Color( 0, 0.231373, 0.0509804, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="bar" type="Sprite" parent="Map/buildings"]
-material = SubResource( 4 )
-position = Vector2( 375.959, 155.016 )
+material = SubResource( 2 )
+position = Vector2( 687.09, 142.317 )
+texture = ExtResource( 8 )
+
+[node name="bar2" type="Sprite" parent="Map/buildings"]
+material = SubResource( 2 )
+position = Vector2( 188.646, 253.435 )
+texture = ExtResource( 8 )
+
+[node name="bar3" type="Sprite" parent="Map/buildings"]
+material = SubResource( 2 )
+position = Vector2( 491.839, 464.559 )
+texture = ExtResource( 8 )
+
+[node name="bar4" type="Sprite" parent="Map/buildings"]
+material = SubResource( 2 )
+position = Vector2( 98.1638, 445.51 )
+texture = ExtResource( 8 )
+
+[node name="bar5" type="Sprite" parent="Map/buildings"]
+material = SubResource( 2 )
+position = Vector2( 685.502, 307.406 )
+texture = ExtResource( 8 )
+
+[node name="bar6" type="Sprite" parent="Map/buildings"]
+material = SubResource( 2 )
+position = Vector2( 429.931, 56.5972 )
 texture = ExtResource( 8 )
 
 [node name="work" type="Sprite" parent="Map/buildings"]
-material = SubResource( 5 )
-position = Vector2( 661.047, 157.739 )
+material = SubResource( 3 )
+position = Vector2( 130.855, 118.054 )
 texture = ExtResource( 9 )
 
 [node name="home" type="Sprite" parent="Map/buildings"]
-material = SubResource( 3 )
-position = Vector2( 415.714, 328.045 )
+material = SubResource( 4 )
+position = Vector2( 687.16, 458.212 )
 texture = ExtResource( 2 )
+
+[node name="bar7" type="Sprite" parent="Map/buildings"]
+material = SubResource( 2 )
+position = Vector2( 336.274, 288.358 )
+texture = ExtResource( 8 )

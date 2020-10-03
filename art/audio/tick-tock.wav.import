@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/tick-tock.wav-09ebfaab1dd9cba8283f45fa10f40831.sample"
+
+[deps]
+
+source_file="res://art/audio/tick-tock.wav"
+dest_files=[ "res://.import/tick-tock.wav-09ebfaab1dd9cba8283f45fa10f40831.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -23,6 +23,7 @@ config/icon="res://icon.png"
 
 SceneChanger="*res://scripts/singletones/scene_changer.gd"
 InputController="*res://scripts/singletones/input_controller.gd"
+GameStatus="*res://scripts/singletones/game_status.gd"
 
 [display]
 

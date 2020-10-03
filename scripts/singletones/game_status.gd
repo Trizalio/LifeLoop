@@ -12,7 +12,10 @@ var family: float = 50
 func _ready():
 	pass # Replace with function body.
 
-
+func got_to_office():
+	
+	yield(get_tree().create_timer(5), "timeout")
+	SceneChanger.goto_scene("res://scenes/city.tscn")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
