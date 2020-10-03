@@ -1,8 +1,8 @@
 shader_type canvas_item;
 
 uniform vec4 selected_glow: hint_color;
-uniform int max_steps = 8;
-uniform float shift_per_step = 0.01;
+uniform int max_steps = 5;
+uniform float shift_per_step = 1;
 uniform float pulse_frequency = 5.;
 uniform float power = 2.;
 
