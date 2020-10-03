@@ -1,11 +1,178 @@
-[gd_scene format=2]
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://Work.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://scenes/glow.tres" type="Material" id=3]
+[ext_resource path="res://art/sheets/0.png" type="Texture" id=4]
+[ext_resource path="res://art/sheets/6.png" type="Texture" id=5]
+[ext_resource path="res://art/sheets/3.png" type="Texture" id=6]
+[ext_resource path="res://art/sheets/2.png" type="Texture" id=7]
+[ext_resource path="res://art/sheets/5.png" type="Texture" id=8]
+[ext_resource path="res://art/sheets/4.png" type="Texture" id=9]
+[ext_resource path="res://art/sheets/1.png" type="Texture" id=10]
+[ext_resource path="res://art/sheets/7.png" type="Texture" id=11]
+[ext_resource path="res://art/seals/green.png" type="Texture" id=12]
+[ext_resource path="res://art/seals/red.png" type="Texture" id=13]
+[ext_resource path="res://art/seals/blue.png" type="Texture" id=14]
+[ext_resource path="res://art/audio/positive.wav" type="AudioStream" id=15]
+[ext_resource path="res://art/audio/negative.wav" type="AudioStream" id=16]
+[ext_resource path="res://scenes/bars.tscn" type="PackedScene" id=17]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [  ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 10 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "sheets",
+"speed": 0.0
+} ]
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 14 ) ],
+"loop": true,
+"name": "blue",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ) ],
+"loop": true,
+"name": "green",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ) ],
+"loop": true,
+"name": "red",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=1]
+resource_name = "sheet_move"
+length = 0.8
+tracks/0/type = "method"
+tracks/0/path = NodePath("..")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "sheet_in_place"
+}, {
+"args": [  ],
+"method": "sheet_removed"
+} ]
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("current_sheet:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 650, -0.25, 0, 0.25, 0, 400, -0.25, 0, 0.25, 0, 150, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4, 0.8 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("current_sheet:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 440, -0.25, 0, 0.25, 0, 440, -0.25, 0, 0.25, 0, 440, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4, 0.8 )
+}
 
 [node name="Node" type="Node"]
+script = ExtResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
+anchor_top = 0.000700734
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 1.0007
 color = Color( 0.0666667, 0.0666667, 0.0666667, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="rules" type="Node2D" parent="."]
+position = Vector2( 400, 150 )
+
+[node name="first" type="AnimatedSprite" parent="rules"]
+scale = Vector2( 5, 3 )
+frames = SubResource( 2 )
+
+[node name="second" type="AnimatedSprite" parent="rules"]
+scale = Vector2( 5, 3 )
+frames = SubResource( 2 )
+
+[node name="third" type="AnimatedSprite" parent="rules"]
+scale = Vector2( 5, 3 )
+frames = SubResource( 2 )
+
+[node name="sheets" type="Node2D" parent="."]
+
+[node name="current_sheet" type="AnimatedSprite" parent="sheets"]
+modulate = Color( 1, 0.972549, 0.686275, 1 )
+position = Vector2( 400, 440 )
+scale = Vector2( 1.74002, 2.46089 )
+frames = SubResource( 3 )
+animation = "sheets"
+
+[node name="seal" type="AnimatedSprite" parent="sheets/current_sheet"]
+visible = false
+position = Vector2( 14, 10 )
+scale = Vector2( 0.348, 0.164 )
+frames = SubResource( 4 )
+animation = "blue"
+
+[node name="draw_pile" type="Sprite" parent="sheets"]
+position = Vector2( 650, 440 )
+scale = Vector2( 2.1, 2.97 )
+texture = ExtResource( 2 )
+
+[node name="result_pile" type="Sprite" parent="sheets"]
+position = Vector2( 150, 440 )
+scale = Vector2( 2.1, 2.97 )
+texture = ExtResource( 2 )
+
+[node name="animation" type="AnimationPlayer" parent="sheets"]
+anims/sheet_move = SubResource( 1 )
+
+[node name="seals" type="Node2D" parent="."]
+material = ExtResource( 3 )
+
+[node name="red" type="Sprite" parent="seals"]
+modulate = Color( 1, 0.545098, 0.545098, 1 )
+position = Vector2( 480, 300 )
+texture = ExtResource( 2 )
+
+[node name="green" type="Sprite" parent="seals"]
+modulate = Color( 0.596078, 1, 0.592157, 1 )
+position = Vector2( 320, 300 )
+texture = ExtResource( 2 )
+
+[node name="blue" type="Sprite" parent="seals"]
+use_parent_material = true
+position = Vector2( 400, 300 )
+texture = ExtResource( 2 )
+
+[node name="audio" type="Node2D" parent="."]
+
+[node name="negative" type="AudioStreamPlayer2D" parent="audio"]
+stream = ExtResource( 16 )
+
+[node name="positive" type="AudioStreamPlayer2D" parent="audio"]
+stream = ExtResource( 15 )
+
+[node name="MarginContainer" parent="." instance=ExtResource( 17 )]

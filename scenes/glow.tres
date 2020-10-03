@@ -4,8 +4,8 @@
 
 [resource]
 shader = ExtResource( 1 )
-shader_param/selected_glow = Color( 0.415686, 1, 0.364706, 1 )
-shader_param/max_steps = 4
-shader_param/shift_per_step = 3.0
+shader_param/selected_glow = Color( 1, 0.909804, 0.470588, 1 )
+shader_param/max_steps = 6
+shader_param/shift_per_step = 1.0
 shader_param/pulse_frequency = 5.0
-shader_param/power = 2.063
+shader_param/power = 1.487

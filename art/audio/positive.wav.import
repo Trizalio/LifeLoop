@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/positive.wav-1bdb6c4e55702d75f4f46816e8415311.sample"
+
+[deps]
+
+source_file="res://art/audio/positive.wav"
+dest_files=[ "res://.import/positive.wav-1bdb6c4e55702d75f4f46816e8415311.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
