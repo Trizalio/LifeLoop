@@ -33,13 +33,14 @@ func _ready():
 	audio_negative = get_node("audio/negative")
 	sheet_animation = get_node("sheets/animation")
 	selected_object_index = 0
-	scene_objects = [
-		get_node("seals/blue"),
-		get_node("seals/red"),
-		get_node("seals/green"),
-		get_node("seals/exit"),
-	]
-	select_object(0)
+	scene_objects = $seals.get_children()
+#	scene_objects = [
+#		get_node("seals/blue"),
+#		get_node("seals/red"),
+#		get_node("seals/green"),
+#		get_node("seals/exit"),
+#	]
+	select_object(2)
 	select_rules()
 	get_next_sheet()
 	GameStatus.set_office_time($time)
@@ -72,8 +73,12 @@ func use_seal():
 	get_next_sheet()
 	
 func check_seal(seal_color: String):
-	return bool(sheet.frame % len(seal_color) == 0)
-		
+	if seal_color == 'blue' and sheet.frame in [0, 1]:
+		return true
+	if seal_color == 'green' and sheet.frame in [2, 3, 4]:
+		return true
+	if seal_color == 'red' and sheet.frame in [5, 6, 7]:
+		return true		
 	
 func get_next_sheet():
 	sheet_animation.play("sheet_move")

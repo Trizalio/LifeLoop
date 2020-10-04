@@ -188,10 +188,10 @@ anims/sheet_move = SubResource( 4 )
 [node name="seals" type="Node2D" parent="."]
 material = ExtResource( 17 )
 
-[node name="red" type="Sprite" parent="seals"]
-modulate = Color( 1, 0.545098, 0.545098, 1 )
-position = Vector2( 480, 300 )
-texture = ExtResource( 3 )
+[node name="exit" type="Sprite" parent="seals"]
+modulate = Color( 0.403922, 0.403922, 0.403922, 1 )
+position = Vector2( 98.3629, 230.407 )
+texture = ExtResource( 5 )
 
 [node name="green" type="Sprite" parent="seals"]
 modulate = Color( 0.596078, 1, 0.592157, 1 )
@@ -203,10 +203,10 @@ use_parent_material = true
 position = Vector2( 400, 300 )
 texture = ExtResource( 8 )
 
-[node name="exit" type="Sprite" parent="seals"]
-modulate = Color( 0.403922, 0.403922, 0.403922, 1 )
-position = Vector2( 98.3629, 230.407 )
-texture = ExtResource( 5 )
+[node name="red" type="Sprite" parent="seals"]
+modulate = Color( 1, 0.545098, 0.545098, 1 )
+position = Vector2( 480, 300 )
+texture = ExtResource( 3 )
 
 [node name="audio" type="Node2D" parent="."]
 
@@ -217,7 +217,6 @@ stream = ExtResource( 6 )
 stream = ExtResource( 4 )
 
 [node name="bars" parent="." instance=ExtResource( 15 )]
-visible = false
 
 [node name="time" parent="." instance=ExtResource( 18 )]
 
