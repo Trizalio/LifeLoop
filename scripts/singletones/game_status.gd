@@ -1,9 +1,8 @@
 extends Node
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+#var WorkTimeLabel = preload("res://scenes/work_time.tscn")
+
 var money: float = 50
 var health: float = 50
 var family: float = 50
@@ -35,18 +34,35 @@ func go_to_work():
 var seconds_in_office = 30
 var time_steps = 9
 var day_start_time = 9
+var current_time_step = 0
+var got_to_office_from_work = false
+
+func set_office_time(target: Label):
+	print('current_time_step: ', current_time_step)
+	print('day_start_time: ', day_start_time)
+	print('time: ', "%0*d:00" % [2, day_start_time + current_time_step])
+	target.text = "%0*d:00" % [2, day_start_time + current_time_step]
+	
+func return_to_office():
+	got_to_office_from_work = true
+	SceneChanger.goto_scene("res://scenes/office.tscn")
+
 func got_to_office():
+	if got_to_office_from_work:
+		got_to_office_from_work = false
+		return
+	current_time_step = 0
+#	var time_label = WorkTimeLabel.instance()
+	#	new_player.set_player_name(name)
+#	new_player.player_name = name
+#	players_container.add_child(new_player)
+	
 	var seconds_per_time_step = seconds_in_office / time_steps
-	var current_time_step = 0
 	while current_time_step < time_steps:
 		var time_label: Label = get_node('/root/office/time')
 		if time_label == null:
 			time_label = get_node('/root/work/time')
-		var hour
-		print('current_time_step: ', current_time_step)
-		print('day_start_time: ', day_start_time)
-		print('time: ', "%0*d:00" % [2, day_start_time + current_time_step])
-		time_label.text = "%0*d:00" % [2, day_start_time + current_time_step]
+		set_office_time(time_label)
 		yield(get_tree().create_timer(seconds_per_time_step), "timeout")
 		current_time_step += 1
 		
