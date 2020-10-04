@@ -15,7 +15,7 @@
 [ext_resource path="res://art/seals/green.png" type="Texture" id=13]
 [ext_resource path="res://art/seals/blue.png" type="Texture" id=14]
 [ext_resource path="res://scenes/bars.tscn" type="PackedScene" id=15]
-[ext_resource path="res://scenes/Work.gd" type="Script" id=16]
+[ext_resource path="res://scenes/work.gd" type="Script" id=16]
 [ext_resource path="res://scenes/glow.tres" type="Material" id=17]
 
 [sub_resource type="SpriteFrames" id=1]
@@ -175,3 +175,11 @@ stream = ExtResource( 6 )
 stream = ExtResource( 4 )
 
 [node name="MarginContainer" parent="." instance=ExtResource( 15 )]
+
+[node name="time" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "08:00"
+__meta__ = {
+"_edit_use_anchors_": false
+}

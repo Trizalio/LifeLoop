@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scripts/city_player.gd" type="Script" id=1]
 [ext_resource path="res://art/buildings/heal.png" type="Texture" id=2]
@@ -11,7 +11,24 @@
 [ext_resource path="res://art/buildings/coin.png" type="Texture" id=9]
 [ext_resource path="res://scenes/glow.shader" type="Shader" id=10]
 [ext_resource path="res://art/buildings/building.PNG" type="Texture" id=11]
-[ext_resource path="res://art/buildings/city_map.png" type="Texture" id=12]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "up",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "side",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "down",
+"speed": 5.0
+} ]
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 10 )
@@ -36,24 +53,6 @@ shader_param/max_steps = 4
 shader_param/shift_per_step = 1.0
 shader_param/pulse_frequency = 5.0
 shader_param/power = 0.2
-
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "up",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 5 ) ],
-"loop": true,
-"name": "side",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 3 ) ],
-"loop": true,
-"name": "down",
-"speed": 5.0
-} ]
 
 [node name="city" type="Node"]
 
@@ -169,6 +168,20 @@ color = Color( 0.32549, 0.32549, 0.32549, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="player" type="Node2D" parent="map"]
+position = Vector2( 594.363, 511.217 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="AnimatedSprite" parent="map/player"]
+modulate = Color( 0.478431, 0.498039, 0.576471, 1 )
+material = ExtResource( 6 )
+scale = Vector2( 0.7, 0.7 )
+frames = SubResource( 1 )
+animation = "up"
 
 [node name="buildings" type="Node2D" parent="map"]
 
@@ -383,26 +396,3 @@ texture = ExtResource( 2 )
 material = SubResource( 2 )
 position = Vector2( 336.274, 288.358 )
 texture = ExtResource( 8 )
-
-[node name="Sprite" type="Sprite" parent="map"]
-visible = false
-position = Vector2( 357.737, 282.986 )
-texture = ExtResource( 12 )
-
-[node name="Sprite2" type="Sprite" parent="map"]
-position = Vector2( 676.444, 444.718 )
-texture = ExtResource( 9 )
-
-[node name="player" type="Node2D" parent="map"]
-position = Vector2( 594.363, 517.574 )
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="AnimatedSprite" parent="map/player"]
-modulate = Color( 0.478431, 0.498039, 0.576471, 1 )
-material = ExtResource( 6 )
-scale = Vector2( 0.7, 0.7 )
-frames = SubResource( 1 )
-animation = "up"

@@ -1,5 +1,6 @@
 extends Node
 
+signal scene_changed
 
 var current_scene = null
 
@@ -35,3 +36,4 @@ func _deferred_goto_scene(path):
 	
 	# Optionally, to make it compatible with the SceneTree.change_scene() API.
 	get_tree().set_current_scene(current_scene)
+	emit_signal("scene_changed")
