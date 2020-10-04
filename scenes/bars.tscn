@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/bars.gd" type="Script" id=1]
+[ext_resource path="res://fonts/PressStart2P-Regular.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 0.0
@@ -17,6 +18,13 @@ corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
+
+[sub_resource type="DynamicFont" id=4]
+size = 8
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 2 )
 
 [sub_resource type="StyleBoxFlat" id=2]
 content_margin_left = 0.0
@@ -53,6 +61,10 @@ corner_radius_bottom_left = 2
 [node name="bars" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 0.667419
+margin_top = -1.33484
+margin_right = 0.667419
+margin_bottom = -1.33484
 custom_constants/margin_right = 20
 custom_constants/margin_top = 20
 custom_constants/margin_left = 20
@@ -83,6 +95,19 @@ custom_styles/fg = SubResource( 1 )
 value = 30.0
 percent_visible = false
 
+[node name="Label" type="Label" parent="vbox/bars/money"]
+margin_left = 5.6
+margin_top = 3.7
+margin_right = 45.6
+margin_bottom = 11.7
+rect_pivot_offset = Vector2( 25.2376, 9.92523 )
+custom_fonts/font = SubResource( 4 )
+text = "Money"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="stress" type="ProgressBar" parent="vbox/bars"]
 margin_left = 254.0
 margin_right = 505.0
@@ -93,6 +118,19 @@ custom_styles/fg = SubResource( 2 )
 value = 40.0
 percent_visible = false
 
+[node name="Label2" type="Label" parent="vbox/bars/stress"]
+margin_left = 5.6
+margin_top = 3.7
+margin_right = 45.6
+margin_bottom = 11.7
+rect_pivot_offset = Vector2( 25.2376, 9.92523 )
+custom_fonts/font = SubResource( 4 )
+text = "Family"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="family" type="ProgressBar" parent="vbox/bars"]
 margin_left = 509.0
 margin_right = 760.0
@@ -102,3 +140,16 @@ size_flags_horizontal = 3
 custom_styles/fg = SubResource( 3 )
 value = 50.0
 percent_visible = false
+
+[node name="Label3" type="Label" parent="vbox/bars/family"]
+margin_left = 5.67199
+margin_top = 3.7
+margin_right = 45.672
+margin_bottom = 11.7
+rect_pivot_offset = Vector2( 25.2376, 9.92523 )
+custom_fonts/font = SubResource( 4 )
+text = "Stress"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

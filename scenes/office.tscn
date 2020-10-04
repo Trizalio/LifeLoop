@@ -46,6 +46,7 @@ scale = Vector2( 0.844758, 0.959502 )
 texture = ExtResource( 10 )
 
 [node name="ball" type="Sprite" parent="items"]
+visible = false
 position = Vector2( 663.11, 338.879 )
 texture = ExtResource( 3 )
 

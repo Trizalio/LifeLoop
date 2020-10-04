@@ -123,7 +123,7 @@ func return_to_office():
 
 func got_to_office():
 	get_node('/root/office').limit_selectable_objects_to([
-		'lamp', 'printer', 'whiteboard', 'ball'
+		'lamp', 'printer', 'whiteboard', 'pc'
 	])
 	if got_to_office_from_work:
 		got_to_office_from_work = false
@@ -187,7 +187,7 @@ func came_home():
 	SceneChanger.goto_scene("res://scenes/home.tscn")
 	yield(SceneChanger, "scene_changed")
 	var home = get_node("/root/home")
-	home.limit_selectable_objects_to(['bed', 'bottle'])
+	home.limit_selectable_objects_to(['bed', 'bottle', 'sink', 'crack', 'bookshelf', 'tv'])
 
 func work_done(result_is_correct):
 	if result_is_correct:
