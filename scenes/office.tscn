@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://art/sheets/0.png" type="Texture" id=1]
 [ext_resource path="res://art/sheets/1.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/office.gd" type="Script" id=5]
 [ext_resource path="res://art/office/office.png" type="Texture" id=6]
 [ext_resource path="res://scenes/work_time.tscn" type="PackedScene" id=7]
+[ext_resource path="res://art/audio/office.wav" type="AudioStream" id=8]
 
 [node name="office" type="Node"]
 script = ExtResource( 5 )
@@ -46,3 +47,7 @@ margin_left = 11.0622
 margin_top = 9.76337
 margin_right = 120.062
 margin_bottom = 53.7634
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+autoplay = true
