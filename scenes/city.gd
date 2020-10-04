@@ -10,8 +10,7 @@ func _input(event):
 	var user_selection_input = InputController.get_selection_from_event(event)
 	if user_selection_input == InputController.UserSelectionInput.use:
 		if selected_marker:
-			print('selected_marker: ', selected_marker)
-			emit_signal('building_used', [selected_marker.name])
+			emit_signal('building_used', selected_marker.name)
 
 var marker_nodes = []
 var player = null
@@ -23,7 +22,9 @@ export (float) var marker_select_range = 100
 export (float) var marker_glow_power = 5
 export (float) var default_marker_glow_power = 0.5
 
-func come_to_office():
+func come_to_office(buildings_to_act):
+	show_buildings(buildings_to_act)
+			
 #	var animation = get_node("animation")
 #	animation.play("player_to_work")
 	print('come_to_office')
@@ -35,19 +36,23 @@ func come_to_office():
 	yield(player, 'destination_reached')
 	emit_signal("came_to_office")
 
-func start_at_office(buildings_to_act):
+func show_buildings(buildings_to_act):
 	for i in len(marker_nodes):
 		var node: Node2D = marker_nodes[i]
-		if not(node.name in buildings_to_act):
-			node.visible = false
+		var active = int(node.name in buildings_to_act)
+		node.modulate.a = 0.3 + 0.7 * active
+		node.material.set_shader_param("power", default_marker_glow_power * active)
 
+func start_at_office(buildings_to_act):
+	player.blink_to_destination(work_position)
+	show_buildings(buildings_to_act)
 
 func select_nearest_building():
 	var nearest_marker = null
 	var nearest_distance = null
 	for i in len(marker_nodes):
 		var marker: Node2D = marker_nodes[i]
-		if not marker.visible:
+		if marker.modulate.a < 1.0:
 			continue
 		if nearest_marker == null:
 			nearest_marker = marker
@@ -69,31 +74,10 @@ func select_nearest_building():
 		selected_marker.material.set_shader_param("power", default_marker_glow_power)
 		selected_marker = null
 #
-#	if nearest_marker != null and selected_marker != nearest_marker:
-#		if selected_marker != null:
-#			selected_marker.material.set_shader_param("power", default_marker_glow_power)
-#		selected_marker = nearest_marker 
-#
-#	if nearest_distance < marker_glow_range:
-#		selected_marker.material.set_shader_param("power", marker_glow_power)
-#	else:
-#		selected_marker.material.set_shader_param("power", default_marker_glow_power)
-#
-#		var glow_power = clamp(40 / delta_position.length(), 0.2, 5.0)
-#		if glow_power > 1:
-#			glow_power = 3.0
-#			active_building = building
-#		building.material.set_shader_param("power", glow_power)
-#		print('building.material.set_shader_param("power", ', glow_power, ')')
-	
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	marker_nodes = $map/markers.get_children()
 	player = $map/player
 	
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	select_nearest_building()
 

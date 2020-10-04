@@ -356,7 +356,7 @@ position = Vector2( 357.737, 282.986 )
 texture = ExtResource( 12 )
 
 [node name="player" parent="map" instance=ExtResource( 3 )]
-position = Vector2( 367.638, 407.39 )
+position = Vector2( 223.551, 157.357 )
 
 [node name="unpassible_zone" type="StaticBody2D" parent="map"]
 position = Vector2( 535.143, 392.438 )
