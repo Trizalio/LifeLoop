@@ -3,14 +3,13 @@
 [ext_resource path="res://scripts/main.gd" type="Script" id=1]
 [ext_resource path="res://art/audio/tick-tock.wav" type="AudioStream" id=2]
 
-[sub_resource type="InputEventAction" id=2]
+[sub_resource type="InputEventAction" id=1]
 action = "ui_accept"
 
-[sub_resource type="ShortCut" id=3]
-shortcut = SubResource( 2 )
+[sub_resource type="ShortCut" id=2]
+shortcut = SubResource( 1 )
 
-[sub_resource type="Animation" id=1]
-resource_name = "fade"
+[sub_resource type="Animation" id=3]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Fader:color")
@@ -80,7 +79,7 @@ margin_right = 169.0
 margin_bottom = 280.0
 focus_mode = 0
 enabled_focus_mode = 0
-shortcut = SubResource( 3 )
+shortcut = SubResource( 2 )
 text = "Press any button to start"
 flat = true
 
@@ -94,7 +93,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/fade = SubResource( 1 )
+anims/fade = SubResource( 3 )
 
 [node name="tick_tack_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )
