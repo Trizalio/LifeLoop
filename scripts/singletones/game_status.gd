@@ -22,14 +22,6 @@ func try_find(location: String):
 	if node != null:
 		node.print_tree()
 	
-func go_to_work():
-	SceneChanger.goto_scene("res://scenes/city.tscn")
-	yield(SceneChanger, "scene_changed")
-#	try_find('/root')
-	try_find('/root/city/map/player')
-#	var city = get_node('/root/city')
-#	print('city: ', city)
-#	print_tree()
 
 var seconds_in_office = 30
 var time_steps = 9
@@ -52,10 +44,6 @@ func got_to_office():
 		got_to_office_from_work = false
 		return
 	current_time_step = 0
-#	var time_label = WorkTimeLabel.instance()
-	#	new_player.set_player_name(name)
-#	new_player.player_name = name
-#	players_container.add_child(new_player)
 	
 	var seconds_per_time_step = seconds_in_office / time_steps
 	while current_time_step < time_steps:
@@ -65,9 +53,17 @@ func got_to_office():
 		set_office_time(time_label)
 		yield(get_tree().create_timer(seconds_per_time_step), "timeout")
 		current_time_step += 1
-		
-#	yield(get_tree().create_timer(5), "timeout")
+	gone_from_office()
+
+func go_to_office():
 	SceneChanger.goto_scene("res://scenes/city.tscn")
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	yield(SceneChanger, "scene_changed")
+	var city = get_node("/root/city")
+	var animation = city.get_node("animation")
+	animation.play("player_to_work")
+	yield(city, "came_to_office")
+	SceneChanger.goto_scene("res://scenes/office.tscn")
+	
+func gone_from_office():
+	SceneChanger.goto_scene("res://scenes/city.tscn")
+	

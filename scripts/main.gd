@@ -20,7 +20,7 @@ func _ready():
 func _on_Start_pressed():
 	print('_on_Start_pressed')
 	var player = get_node("AnimationPlayer")
-	if player.is_playing():
+	if not player.is_playing():
 		sound.play()
 		player.play('fade')
 		print("start_game")
