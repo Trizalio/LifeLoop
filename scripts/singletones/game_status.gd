@@ -7,8 +7,13 @@ var medium_effect: float = 10
 var strong_effect: float = 15
 
 var buildings = [
-	BuildingData.new('grocery_store', -small_effect, small_effect, no_effect),
-	BuildingData.new('bar', -medium_effect, -small_effect, medium_effect),
+	BuildingData.new('park', no_effect, no_effect, no_effect),
+	BuildingData.new('grocery_store', -small_effect, no_effect, small_effect),
+	BuildingData.new('gym', -small_effect, small_effect, no_effect),
+	BuildingData.new('bar', -medium_effect, medium_effect, -small_effect),
+	BuildingData.new('clothing_store', -medium_effect, no_effect, medium_effect),
+	BuildingData.new('stripclub', -strong_effect, strong_effect, -medium_effect),
+	BuildingData.new('jewelry_store', -strong_effect, no_effect, strong_effect),
 ]
 var name_to_building = {}
 

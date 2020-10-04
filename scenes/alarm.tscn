@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/circle.shader" type="Shader" id=1]
 [ext_resource path="res://scenes/alarm.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://art/audio/alarm.wav" type="AudioStream" id=4]
 [ext_resource path="res://scenes/glow.shader" type="Shader" id=5]
 [ext_resource path="res://fonts/PressStart2P-Regular.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://art/clock.png" type="Texture" id=7]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -49,8 +50,8 @@ texture = ExtResource( 3 )
 [node name="alarm" type="Sprite" parent="."]
 material = SubResource( 2 )
 position = Vector2( 400, 300 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 3 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 7 )
 
 [node name="sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
