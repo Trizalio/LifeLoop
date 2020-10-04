@@ -11,29 +11,38 @@ var money_per_sheet: float = 1
 var stress_per_mistake: float = 1
 
 var buildings = [
-	ResoureChange.new('park', no_effect, no_effect, no_effect),
-	ResoureChange.new('grocery_store', -small_effect, no_effect, small_effect),
-	ResoureChange.new('gym', -small_effect, small_effect, no_effect),
-	ResoureChange.new('bar', -medium_effect, medium_effect, -small_effect),
-	ResoureChange.new('clothing_store', -medium_effect, no_effect, medium_effect),
-	ResoureChange.new('stripclub', -strong_effect, strong_effect, -medium_effect),
-	ResoureChange.new('jewelry_store', -strong_effect, no_effect, strong_effect),
+	ResourseChange.new('park', no_effect, no_effect, no_effect),
+	ResourseChange.new('grocery_store', -small_effect, no_effect, small_effect),
+	ResourseChange.new('gym', -small_effect, small_effect, no_effect),
+	ResourseChange.new('bar', -medium_effect, medium_effect, -small_effect),
+	ResourseChange.new('clothing_store', -medium_effect, no_effect, medium_effect),
+	ResourseChange.new('stripclub', -strong_effect, strong_effect, -medium_effect),
+	ResourseChange.new('jewelry_store', -strong_effect, no_effect, strong_effect),
 ]
 var name_to_building = {}
 
 
-var items = [
-	ResoureChange.new('bottle', -small_effect, small_effect, no_effect),
+var home_items = [
+	ResourseChange.new('bottle', -small_effect, small_effect, no_effect),
 ]
-var name_to_items = {}
+var name_to_home_items = {}
+
+
+var office_items = [
+	ResourseChange.new('correct_sheet', money_per_sheet, no_effect, no_effect),
+	ResourseChange.new('mistake_sheet', no_effect, stress_per_mistake, no_effect),
+]
+var name_to_office_item = {}
+
 var day_to_buildings = {}
 
 
-class ResoureChange:
+class ResourseChange:
 	var title: String = ''
 	var money_effect: float = 0
 	var stress_effect: float = 0
 	var family_effect: float = 0
+	var times_used: int = 0
 	
 	func _init(_title: String, _money_effect: float, _stress_effect: float, _family_effect: float):
 #		print('_init: ', new_nickname, " ", new_id, " ", new_achievements)
@@ -41,6 +50,7 @@ class ResoureChange:
 		money_effect = _money_effect
 		stress_effect = _stress_effect
 		family_effect = _family_effect
+		times_used = 0
 
 #var ResourseBars = preload("res://scenes/bars.tscn")
 signal resources_changed
@@ -50,18 +60,25 @@ var family: float = 50
 
 var resourse_bars = null
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
+func prepare_changes():
 	for i in len(buildings):
-		var building: ResoureChange = buildings[i]
+		var building: ResourseChange = buildings[i]
+		building.times_used = 0
 		name_to_building[building.title] = building
-	for i in len(items):
-		var item: ResoureChange = items[i]
-		name_to_items[item.title] = item
-	
+	for i in len(home_items):
+		var item: ResourseChange = home_items[i]
+		item.times_used = 0
+		name_to_home_items[item.title] = item
+	for i in len(home_items):
+		var item: ResourseChange = office_items[i]
+		item.times_used = 0
+		name_to_office_item[item.title] = item
+
+func _ready():
+	prepare_changes()
 	day_to_buildings = {
-		1: [name_to_building.bar, name_to_building.grocery_store],
-		2: [name_to_building.bar],
+		1: ['home', 'bar', 'grocery_store', ],
+		2: ['home', 'bar'],
 	#	1: ['bar'],
 	#	2: ['grocery_store', 'park'],
 	#	3: ['grocery_store', 'park', 'gym'],
@@ -70,6 +87,7 @@ func _ready():
 	}
 	
 func start_new_game():
+	prepare_changes()
 	money = 50
 	stress = 50
 	family = 50
@@ -88,7 +106,7 @@ func try_find(location: String):
 		node.print_tree()
 	
 
-var seconds_in_office = 30
+var seconds_in_office = 3
 var time_steps = 9
 var day_start_time = 9
 var current_time_step = 0
@@ -136,24 +154,24 @@ func on_building_used(building_name: String):
 	if building_name == 'home':
 		came_home()
 		return
-	var building_data: ResoureChange = name_to_building[building_name]
-	
-	modify_resourses(building_data.money_effect, building_data.stress_effect, 
-												building_data.family_effect)
+	var building_data: ResourseChange = name_to_building[building_name]
+	modify_resourses(building_data)
 												
 func used_item(item_name):
 	if item_name == 'bed':
 		go_to_office()
 		return
-	var item_data: ResoureChange = name_to_items[item_name]
-	modify_resourses(item_data.money_effect, item_data.stress_effect, 
-												item_data.family_effect)
+	var item_data: ResourseChange = name_to_home_items[item_name]
+	modify_resourses(item_data)
 
-func modify_resourses(money_value: float, stress_value: float, family_value: float):
-	print('modify_resourses', money_value, stress_value, family_value)
-	money += money_value
-	stress += stress_value
-	family += family_value
+func modify_resourses(resource_change: ResourseChange):
+	print('modify_resourses', resource_change.title, 
+			resource_change.money_effect, resource_change.stress_effect,
+			resource_change.family_effect)
+	resource_change.times_used += 1
+	money += resource_change.money_effect
+	stress += resource_change.stress_effect
+	family += resource_change.family_effect
 	if money < 0:
 		game_over('no_money')
 	if stress < 0:
@@ -173,9 +191,9 @@ func came_home():
 
 func work_done(result_is_correct):
 	if result_is_correct:
-		modify_resourses(money_per_sheet, 0, 0)
+		modify_resourses(name_to_office_item['correct_sheet'])
 	else:
-		modify_resourses(0, stress_per_mistake, 0)
+		modify_resourses(name_to_office_item['mistake_sheet'])
 
 func gone_from_office():
 	SceneChanger.goto_scene("res://scenes/city.tscn")
