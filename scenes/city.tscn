@@ -1,7 +1,11 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=20 format=2]
 
+[ext_resource path="res://scripts/city_player.gd" type="Script" id=1]
 [ext_resource path="res://art/buildings/heal.png" type="Texture" id=2]
-[ext_resource path="res://scenes/city_player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://art/car_back.PNG" type="Texture" id=3]
+[ext_resource path="res://art/car_front.png" type="Texture" id=4]
+[ext_resource path="res://art/car_side.PNG" type="Texture" id=5]
+[ext_resource path="res://scenes/glow.tres" type="Material" id=6]
 [ext_resource path="res://scenes/bars.tscn" type="PackedScene" id=7]
 [ext_resource path="res://art/buildings/bar.png" type="Texture" id=8]
 [ext_resource path="res://art/buildings/coin.png" type="Texture" id=9]
@@ -11,11 +15,21 @@
 [ext_resource path="res://scenes/city.gd" type="Script" id=13]
 [ext_resource path="res://art/audio/town_usual.wav" type="AudioStream" id=14]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 62.1434, 35.0274 )
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 10 )
+shader_param/selected_glow = Color( 1, 0.866667, 0, 1 )
+shader_param/max_steps = 4
+shader_param/shift_per_step = 1.0
+shader_param/pulse_frequency = 5.0
+shader_param/power = 0.2
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 57.6541, 48.6542 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 10 )
+shader_param/selected_glow = Color( 1, 0.866667, 0, 1 )
+shader_param/max_steps = 4
+shader_param/shift_per_step = 1.0
+shader_param/pulse_frequency = 5.0
+shader_param/power = 0.2
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 10 )
@@ -25,69 +39,77 @@ shader_param/shift_per_step = 1.0
 shader_param/pulse_frequency = 5.0
 shader_param/power = 0.2
 
-[sub_resource type="ShaderMaterial" id=4]
-shader = ExtResource( 10 )
-shader_param/selected_glow = Color( 1, 0.866667, 0, 1 )
-shader_param/max_steps = 4
-shader_param/shift_per_step = 1.0
-shader_param/pulse_frequency = 5.0
-shader_param/power = 0.2
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "up",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "side",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "down",
+"speed": 5.0
+} ]
 
-[sub_resource type="ShaderMaterial" id=5]
-shader = ExtResource( 10 )
-shader_param/selected_glow = Color( 1, 0.866667, 0, 1 )
-shader_param/max_steps = 4
-shader_param/shift_per_step = 1.0
-shader_param/pulse_frequency = 5.0
-shader_param/power = 0.2
-
-[sub_resource type="ShaderMaterial" id=6]
-shader = ExtResource( 10 )
-shader_param/selected_glow = Color( 1, 0.866667, 0, 1 )
-shader_param/max_steps = 4
-shader_param/shift_per_step = 1.0
-shader_param/pulse_frequency = 5.0
-shader_param/power = 0.2
-
-[sub_resource type="ShaderMaterial" id=7]
-shader = ExtResource( 10 )
-shader_param/selected_glow = Color( 1, 0.866667, 0, 1 )
-shader_param/max_steps = 4
-shader_param/shift_per_step = 1.0
-shader_param/pulse_frequency = 5.0
-shader_param/power = 0.2
-
-[sub_resource type="ShaderMaterial" id=8]
-shader = ExtResource( 10 )
-shader_param/selected_glow = Color( 1, 0.866667, 0, 1 )
-shader_param/max_steps = 4
-shader_param/shift_per_step = 1.0
-shader_param/pulse_frequency = 5.0
-shader_param/power = 0.2
-
-[sub_resource type="ShaderMaterial" id=9]
-shader = ExtResource( 10 )
-shader_param/selected_glow = Color( 1, 0.866667, 0, 1 )
-shader_param/max_steps = 4
-shader_param/shift_per_step = 1.0
-shader_param/pulse_frequency = 5.0
-shader_param/power = 0.2
-
-[sub_resource type="ShaderMaterial" id=10]
-shader = ExtResource( 10 )
-shader_param/selected_glow = Color( 1, 0.866667, 0, 1 )
-shader_param/max_steps = 4
-shader_param/shift_per_step = 1.0
-shader_param/pulse_frequency = 5.0
-shader_param/power = 0.2
-
-[sub_resource type="ShaderMaterial" id=11]
-shader = ExtResource( 10 )
-shader_param/selected_glow = Color( 1, 0.866667, 0, 1 )
-shader_param/max_steps = 4
-shader_param/shift_per_step = 1.0
-shader_param/pulse_frequency = 5.0
-shader_param/power = 0.2
+[sub_resource type="Animation" id=5]
+resource_name = "player_to_work"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("map/player:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3, 5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 594.363, 517.574 ), Vector2( 594.363, 152 ), Vector2( 212.194, 151.119 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("map/player/Sprite:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "up", "side" ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("map/player/Sprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 3, 5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0.7, 0.7 ), Vector2( -0.7, 0.7 ), Vector2( -0.7, 0.7 ) ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "on_animation_end"
+} ]
+}
 
 [node name="city" type="Node"]
 script = ExtResource( 13 )
@@ -128,7 +150,6 @@ margin_bottom = -0.840881
 [node name="map" type="Node2D" parent="."]
 
 [node name="Roads" type="Node2D" parent="map"]
-visible = false
 
 [node name="ColorRect" type="ColorRect" parent="map/Roads"]
 margin_left = 189.0
@@ -210,132 +231,157 @@ __meta__ = {
 
 [node name="building" type="Sprite" parent="map/buildings"]
 visible = false
+material = SubResource( 1 )
 position = Vector2( 153.723, 132.792 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 11 )
 
 [node name="building2" type="Sprite" parent="map/buildings"]
+material = SubResource( 1 )
 position = Vector2( 428.343, 72.4712 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 11 )
 
 [node name="building8" type="Sprite" parent="map/buildings"]
+material = SubResource( 1 )
 position = Vector2( 131.499, 131.205 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 11 )
 
 [node name="building12" type="Sprite" parent="map/buildings"]
+material = SubResource( 1 )
 position = Vector2( 275.953, 69.2963 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 11 )
 
 [node name="building9" type="Sprite" parent="map/buildings"]
+material = SubResource( 1 )
 position = Vector2( 338.465, 482.561 )
 scale = Vector2( 0.276647, 0.276647 )
 texture = ExtResource( 11 )
 offset = Vector2( -32.3137, -30.6442 )
 
 [node name="building13" type="Sprite" parent="map/buildings"]
+material = SubResource( 1 )
 position = Vector2( 338.465, 482.561 )
 scale = Vector2( 0.276647, 0.276647 )
 texture = ExtResource( 11 )
 offset = Vector2( -32.3137, -99.5001 )
 
 [node name="building24" type="Sprite" parent="map/buildings"]
+material = SubResource( 1 )
 position = Vector2( 274.969, 501.61 )
 scale = Vector2( 0.276647, 0.276647 )
 texture = ExtResource( 11 )
 offset = Vector2( -32.3137, -99.5001 )
 
 [node name="building25" type="Sprite" parent="map/buildings"]
+material = SubResource( 1 )
 position = Vector2( 676.581, 96.8228 )
 scale = Vector2( 0.276647, 0.276647 )
 texture = ExtResource( 11 )
 offset = Vector2( -32.3137, -99.5001 )
 
 [node name="building22" type="Sprite" parent="map/buildings"]
+material = SubResource( 1 )
 position = Vector2( 144.802, 388.905 )
 scale = Vector2( 0.276647, 0.276647 )
 texture = ExtResource( 11 )
 offset = Vector2( -32.3137, -30.6442 )
 
 [node name="building23" type="Sprite" parent="map/buildings"]
+material = SubResource( 1 )
 position = Vector2( 144.802, 388.905 )
 scale = Vector2( 0.276647, 0.276647 )
 texture = ExtResource( 11 )
 offset = Vector2( -32.3137, -99.5001 )
 
 [node name="building20" type="Sprite" parent="map/buildings"]
+material = SubResource( 1 )
 position = Vector2( 73.954, 275.658 )
 scale = Vector2( 0.276647, 0.276647 )
 texture = ExtResource( 11 )
 
 [node name="building21" type="Sprite" parent="map/buildings"]
+material = SubResource( 1 )
 position = Vector2( 73.954, 256.61 )
 scale = Vector2( 0.276647, 0.276647 )
 texture = ExtResource( 11 )
 
 [node name="building18" type="Sprite" parent="map/buildings"]
+material = SubResource( 1 )
 position = Vector2( 561.286, 88.3452 )
 scale = Vector2( 0.276647, 0.276647 )
 texture = ExtResource( 11 )
 
 [node name="building19" type="Sprite" parent="map/buildings"]
+material = SubResource( 1 )
 position = Vector2( 561.286, 67.709 )
 scale = Vector2( 0.276647, 0.276647 )
 texture = ExtResource( 11 )
 
 [node name="building14" type="Sprite" parent="map/buildings"]
+material = SubResource( 1 )
 position = Vector2( 534.3, 350.266 )
 scale = Vector2( 0.276647, 0.276647 )
 texture = ExtResource( 11 )
 
 [node name="building15" type="Sprite" parent="map/buildings"]
+material = SubResource( 1 )
 position = Vector2( 534.3, 331.218 )
 scale = Vector2( 0.276647, 0.276647 )
 texture = ExtResource( 11 )
 
 [node name="building16" type="Sprite" parent="map/buildings"]
+material = SubResource( 1 )
 position = Vector2( 472.392, 350.266 )
 scale = Vector2( 0.276647, 0.276647 )
 texture = ExtResource( 11 )
 
 [node name="building17" type="Sprite" parent="map/buildings"]
+material = SubResource( 1 )
 position = Vector2( 470.804, 331.218 )
 scale = Vector2( 0.276647, 0.276647 )
 texture = ExtResource( 11 )
 
 [node name="building3" type="Sprite" parent="map/buildings"]
+material = SubResource( 1 )
 position = Vector2( 185.471, 269.309 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 11 )
 
 [node name="building4" type="Sprite" parent="map/buildings"]
+material = SubResource( 1 )
 position = Vector2( 685.502, 324.868 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 11 )
 
 [node name="building11" type="Sprite" parent="map/buildings"]
+material = SubResource( 1 )
 position = Vector2( 688.677, 159.778 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 11 )
 
 [node name="building10" type="Sprite" parent="map/buildings"]
+material = SubResource( 1 )
 position = Vector2( 688.677, 475.671 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 11 )
 
 [node name="building5" type="Sprite" parent="map/buildings"]
+material = SubResource( 1 )
 position = Vector2( 504.538, 231.211 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 11 )
 
 [node name="building6" type="Sprite" parent="map/buildings"]
+material = SubResource( 1 )
 position = Vector2( 496.602, 477.258 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 11 )
 
 [node name="building7" type="Sprite" parent="map/buildings"]
+material = SubResource( 1 )
 position = Vector2( 110.863, 466.147 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 11 )
@@ -350,6 +396,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+<<<<<<< Updated upstream
 [node name="Sprite" type="Sprite" parent="map"]
 visible = false
 position = Vector2( 357.737, 282.986 )
@@ -374,48 +421,78 @@ shape = SubResource( 2 )
 
 [node name="clothing_store" type="Sprite" parent="map/markers"]
 material = SubResource( 3 )
+=======
+[node name="bar" type="Sprite" parent="map/buildings"]
+material = SubResource( 1 )
+>>>>>>> Stashed changes
 position = Vector2( 687.09, 142.317 )
 texture = ExtResource( 8 )
 
-[node name="gym" type="Sprite" parent="map/markers"]
-material = SubResource( 4 )
+[node name="bar2" type="Sprite" parent="map/buildings"]
+material = SubResource( 1 )
 position = Vector2( 188.646, 253.435 )
 texture = ExtResource( 8 )
 
-[node name="bar" type="Sprite" parent="map/markers"]
-material = SubResource( 5 )
+[node name="bar3" type="Sprite" parent="map/buildings"]
+material = SubResource( 1 )
 position = Vector2( 491.839, 464.559 )
 texture = ExtResource( 8 )
 
-[node name="strip_club" type="Sprite" parent="map/markers"]
-material = SubResource( 6 )
+[node name="bar4" type="Sprite" parent="map/buildings"]
+material = SubResource( 1 )
 position = Vector2( 98.1638, 445.51 )
 texture = ExtResource( 8 )
 
-[node name="grocery_store" type="Sprite" parent="map/markers"]
-material = SubResource( 7 )
+[node name="bar5" type="Sprite" parent="map/buildings"]
+material = SubResource( 1 )
 position = Vector2( 685.502, 307.406 )
 texture = ExtResource( 8 )
 
-[node name="jewelry_store" type="Sprite" parent="map/markers"]
-material = SubResource( 8 )
+[node name="bar6" type="Sprite" parent="map/buildings"]
+material = SubResource( 1 )
 position = Vector2( 429.931, 56.5972 )
 texture = ExtResource( 8 )
 
-[node name="park" type="Sprite" parent="map/markers"]
-material = SubResource( 9 )
-position = Vector2( 336.274, 288.358 )
-texture = ExtResource( 8 )
-
-[node name="work" type="Sprite" parent="map/markers"]
-material = SubResource( 10 )
+[node name="work" type="Sprite" parent="map/buildings"]
+material = SubResource( 2 )
 position = Vector2( 130.855, 118.054 )
 texture = ExtResource( 9 )
 
-[node name="home" type="Sprite" parent="map/markers"]
-material = SubResource( 11 )
+[node name="home" type="Sprite" parent="map/buildings"]
+material = SubResource( 3 )
 position = Vector2( 687.16, 458.212 )
 texture = ExtResource( 2 )
+
+[node name="bar7" type="Sprite" parent="map/buildings"]
+material = SubResource( 1 )
+position = Vector2( 336.274, 288.358 )
+texture = ExtResource( 8 )
+
+[node name="Sprite" type="Sprite" parent="map"]
+visible = false
+position = Vector2( 357.737, 282.986 )
+texture = ExtResource( 12 )
+
+[node name="Sprite2" type="Sprite" parent="map"]
+position = Vector2( 676.444, 444.718 )
+texture = ExtResource( 9 )
+
+[node name="player" type="Node2D" parent="map"]
+position = Vector2( 594.363, 517.574 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="AnimatedSprite" parent="map/player"]
+modulate = Color( 0.478431, 0.498039, 0.576471, 1 )
+material = ExtResource( 6 )
+scale = Vector2( 0.7, 0.7 )
+frames = SubResource( 4 )
+animation = "up"
+
+[node name="animation" type="AnimationPlayer" parent="."]
+anims/player_to_work = SubResource( 5 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )

@@ -23,8 +23,10 @@ func _ready():
 	selected_object_index = 0
 	scene_objects = [
 		get_node("items/ball"),
-		get_node("items/papers"),
-		get_node("items/window"),
+		get_node("items/whiteboard_office"),
+		get_node("items/pc"),
+		get_node("items/lamp"),
+		get_node("items/printer"),
 	]
 	select_object(0)
 	GameStatus.got_to_office()
