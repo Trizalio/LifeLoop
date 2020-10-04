@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scripts/city_player.gd" type="Script" id=1]
 [ext_resource path="res://art/buildings/heal.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://art/buildings/building.PNG" type="Texture" id=11]
 [ext_resource path="res://art/buildings/city_map.png" type="Texture" id=12]
 [ext_resource path="res://scenes/city.gd" type="Script" id=13]
+[ext_resource path="res://art/audio/town_usual.wav" type="AudioStream" id=14]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 10 )
@@ -465,3 +466,7 @@ animation = "up"
 
 [node name="animation" type="AnimationPlayer" parent="."]
 anims/player_to_work = SubResource( 5 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+autoplay = true
