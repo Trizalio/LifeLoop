@@ -62,8 +62,10 @@ func use_seal():
 	if sheet_animation.is_playing():
 		return
 	if check_seal(seal_color_name):
+		GameStatus.work_done(true)
 		audio_positive.play()
 	else:
+		GameStatus.work_done(false)
 		audio_negative.play()
 	seal.visible = true
 	seal.animation = seal_color_name
