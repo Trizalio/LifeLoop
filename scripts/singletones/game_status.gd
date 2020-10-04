@@ -59,7 +59,7 @@ func _ready():
 		var item: ResoureChange = items[i]
 		name_to_items[item.title] = item
 	
-	var day_to_buildings = {
+	day_to_buildings = {
 		1: [name_to_building.bar, name_to_building.grocery_store],
 		2: [name_to_building.bar],
 	#	1: ['bar'],

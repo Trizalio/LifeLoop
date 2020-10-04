@@ -40,8 +40,8 @@ position = Vector2( -54.524, 230.615 )
 scale = Vector2( 0.821086, 0.821086 )
 texture = ExtResource( 9 )
 
-[node name="whiteboard" type="Sprite" parent="items"]
-position = Vector2( 640.897, 150.411 )
+[node name="whiteboard_office" type="Sprite" parent="items"]
+position = Vector2( 640.897, 147.411 )
 scale = Vector2( 0.844758, 0.959502 )
 texture = ExtResource( 10 )
 
@@ -50,7 +50,7 @@ position = Vector2( 663.11, 338.879 )
 texture = ExtResource( 3 )
 
 [node name="pc" type="Sprite" parent="items"]
-position = Vector2( 313.422, 180.658 )
+position = Vector2( 299.422, 170.658 )
 scale = Vector2( 0.82437, 0.82437 )
 texture = ExtResource( 1 )
 
