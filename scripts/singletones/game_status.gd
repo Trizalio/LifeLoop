@@ -11,19 +11,19 @@ var money_per_sheet: float = 1
 var stress_per_mistake: float = 1
 
 var buildings = [
-	BuildingData.new('park', no_effect, no_effect, no_effect),
-	BuildingData.new('grocery_store', -small_effect, no_effect, small_effect),
-	BuildingData.new('gym', -small_effect, small_effect, no_effect),
-	BuildingData.new('bar', -medium_effect, medium_effect, -small_effect),
-	BuildingData.new('clothing_store', -medium_effect, no_effect, medium_effect),
-	BuildingData.new('stripclub', -strong_effect, strong_effect, -medium_effect),
-	BuildingData.new('jewelry_store', -strong_effect, no_effect, strong_effect),
+	ResoureChange.new('park', no_effect, no_effect, no_effect),
+	ResoureChange.new('grocery_store', -small_effect, no_effect, small_effect),
+	ResoureChange.new('gym', -small_effect, small_effect, no_effect),
+	ResoureChange.new('bar', -medium_effect, medium_effect, -small_effect),
+	ResoureChange.new('clothing_store', -medium_effect, no_effect, medium_effect),
+	ResoureChange.new('stripclub', -strong_effect, strong_effect, -medium_effect),
+	ResoureChange.new('jewelry_store', -strong_effect, no_effect, strong_effect),
 ]
 var name_to_building = {}
 
 
 var items = [
-	BuildingData.new('bottle', -small_effect, small_effect, no_effect),
+	ResoureChange.new('bottle', -small_effect, small_effect, no_effect),
 ]
 var name_to_items = {}
 
@@ -35,7 +35,7 @@ var name_to_items = {}
 #	5: ['grocery_store', 'park', 'gym', 'bar', 'clothing_store', 'jewelry_store', 'strip_club'],
 #}
 
-class BuildingData:
+class ResoureChange:
 	var title: String = ''
 	var money_effect: float = 0
 	var stress_effect: float = 0
@@ -59,10 +59,10 @@ var resourse_bars = null
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for i in len(buildings):
-		var building: BuildingData = buildings[i]
+		var building: ResoureChange = buildings[i]
 		name_to_building[building.title] = building
 	for i in len(items):
-		var item: BuildingData = items[i]
+		var item: ResoureChange = items[i]
 		name_to_items[item.title] = item
 	
 func start_new_game():
@@ -100,10 +100,13 @@ func return_to_office():
 	SceneChanger.goto_scene("res://scenes/office.tscn")
 
 func got_to_office():
-	current_day += 1
+	get_node('/root/office').limit_selectable_objects_to([
+		'lamp', 'printer', 'whiteboard_office', 'ball'
+	])
 	if got_to_office_from_work:
 		got_to_office_from_work = false
 		return
+	current_day += 1
 	current_time_step = 0
 	
 	var seconds_per_time_step = seconds_in_office / time_steps
@@ -129,7 +132,7 @@ func on_building_used(building_name: String):
 	if building_name == 'home':
 		came_home()
 		return
-	var building_data: BuildingData = name_to_building[building_name]
+	var building_data: ResoureChange = name_to_building[building_name]
 	
 	modify_resourses(building_data.money_effect, building_data.stress_effect, 
 												building_data.family_effect)
@@ -138,7 +141,7 @@ func used_item(item_name):
 	if item_name == 'bed':
 		go_to_office()
 		return
-	var item_data: BuildingData = name_to_items[item_name]
+	var item_data: ResoureChange = name_to_items[item_name]
 	modify_resourses(item_data.money_effect, item_data.stress_effect, 
 												item_data.family_effect)
 

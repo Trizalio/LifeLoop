@@ -21,16 +21,27 @@ func _input(event):
 		
 func _ready():
 	selected_object_index = 0
-	scene_objects = [
-		get_node("items/ball"),
-		get_node("items/whiteboard_office"),
-		get_node("items/pc"),
-		get_node("items/lamp"),
-		get_node("items/printer"),
-	]
+	scene_objects = $items.get_children()
+#	scene_objects = [
+#		get_node("items/ball"),
+#		get_node("items/whiteboard_office"),
+#		get_node("items/pc"),
+#		get_node("items/lamp"),
+#		get_node("items/printer"),
+#	]
 	select_object(0)
 	GameStatus.got_to_office()
 	GameStatus.set_office_time($time)
+
+func limit_selectable_objects_to(object_names):
+	print('limit_selectable_objects_to: ', object_names)
+	var new_scene_objects = []
+	for i in len(scene_objects):
+		var object = scene_objects[i]
+		if object.name in object_names:
+			new_scene_objects.append(object)
+	scene_objects = new_scene_objects
+	select_object(0)
 
 func select_object(new_object_index: int):
 	new_object_index = new_object_index % len(scene_objects)
