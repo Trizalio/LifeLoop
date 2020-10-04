@@ -69,7 +69,7 @@ func prepare_changes():
 		var item: ResourseChange = home_items[i]
 		item.times_used = 0
 		name_to_home_items[item.title] = item
-	for i in len(home_items):
+	for i in len(office_items):
 		var item: ResourseChange = office_items[i]
 		item.times_used = 0
 		name_to_office_item[item.title] = item
@@ -106,7 +106,7 @@ func try_find(location: String):
 		node.print_tree()
 	
 
-var seconds_in_office = 3
+var seconds_in_office = 30
 var time_steps = 9
 var day_start_time = 9
 var current_time_step = 0
