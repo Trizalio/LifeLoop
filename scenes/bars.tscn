@@ -19,19 +19,19 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=2]
 size = 8
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=4]
 content_margin_left = 0.0
 content_margin_right = 0.0
 content_margin_top = 0.0
 content_margin_bottom = 0.0
-bg_color = Color( 0.0823529, 0.576471, 0.0235294, 1 )
+bg_color = Color( 0.219608, 0.411765, 0.505882, 1 )
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -47,7 +47,7 @@ content_margin_left = 0.0
 content_margin_right = 0.0
 content_margin_top = 0.0
 content_margin_bottom = 0.0
-bg_color = Color( 0.219608, 0.411765, 0.505882, 1 )
+bg_color = Color( 0.0823529, 0.576471, 0.0235294, 1 )
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -101,31 +101,8 @@ margin_top = 3.7
 margin_right = 45.6
 margin_bottom = 11.7
 rect_pivot_offset = Vector2( 25.2376, 9.92523 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "Money"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="stress" type="ProgressBar" parent="vbox/bars"]
-margin_left = 509.0
-margin_right = 760.0
-margin_bottom = 15.0
-rect_min_size = Vector2( 50, 15 )
-size_flags_horizontal = 3
-custom_styles/fg = SubResource( 2 )
-value = 40.0
-percent_visible = false
-
-[node name="Label2" type="Label" parent="vbox/bars/stress"]
-margin_left = 5.6
-margin_top = 3.7
-margin_right = 45.6
-margin_bottom = 11.7
-rect_pivot_offset = Vector2( 25.2376, 9.92523 )
-custom_fonts/font = SubResource( 4 )
-text = "Family"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -137,7 +114,7 @@ margin_right = 505.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 50, 15 )
 size_flags_horizontal = 3
-custom_styles/fg = SubResource( 3 )
+custom_styles/fg = SubResource( 4 )
 value = 50.0
 percent_visible = false
 
@@ -147,8 +124,34 @@ margin_top = 3.7
 margin_right = 45.672
 margin_bottom = 11.7
 rect_pivot_offset = Vector2( 25.2376, 9.92523 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "Stress"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="stress" type="ProgressBar" parent="vbox/bars"]
+margin_left = 509.0
+margin_right = 760.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 50, 15 )
+size_flags_horizontal = 3
+custom_styles/fg = SubResource( 3 )
+value = 40.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="vbox/bars/stress"]
+margin_left = 5.6
+margin_top = 3.7
+margin_right = 45.6
+margin_bottom = 11.7
+rect_pivot_offset = Vector2( 25.2376, 9.92523 )
+custom_fonts/font = SubResource( 2 )
+text = "Family"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
