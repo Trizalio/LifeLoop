@@ -40,6 +40,7 @@ func show_buildings(buildings_to_act):
 	for i in len(marker_nodes):
 		var node: Node2D = marker_nodes[i]
 		var active = int(node.name in buildings_to_act)
+		print(node.name, ' in ', buildings_to_act, ' -> ', active)
 		node.modulate.a = 0.3 + 0.7 * active
 		node.material.set_shader_param("power", default_marker_glow_power * active)
 

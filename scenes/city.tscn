@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://art/buildings/heal.png" type="Texture" id=2]
 [ext_resource path="res://scenes/city_player.tscn" type="PackedScene" id=3]
@@ -10,14 +10,6 @@
 [ext_resource path="res://art/buildings/city_map.png" type="Texture" id=12]
 [ext_resource path="res://scenes/city.gd" type="Script" id=13]
 [ext_resource path="res://art/audio/town_usual.wav" type="AudioStream" id=14]
-
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 10 )
-shader_param/selected_glow = Color( 1, 0.866667, 0, 1 )
-shader_param/max_steps = 4
-shader_param/shift_per_step = 1.0
-shader_param/pulse_frequency = 5.0
-shader_param/power = 0.2
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 62.1434, 35.0274 )
@@ -136,7 +128,6 @@ margin_bottom = -0.840881
 [node name="map" type="Node2D" parent="."]
 
 [node name="Roads" type="Node2D" parent="map"]
-visible = false
 
 [node name="ColorRect" type="ColorRect" parent="map/Roads"]
 margin_left = 189.0
@@ -215,12 +206,6 @@ __meta__ = {
 }
 
 [node name="buildings" type="Node2D" parent="map"]
-
-[node name="building" type="Sprite" parent="map/buildings"]
-visible = false
-position = Vector2( 153.723, 132.792 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 11 )
 
 [node name="building2" type="Sprite" parent="map/buildings"]
 position = Vector2( 428.343, 72.4712 )
@@ -358,11 +343,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="bar7" type="Sprite" parent="map/buildings"]
-material = SubResource( 1 )
-position = Vector2( 336.274, 288.358 )
-texture = ExtResource( 8 )
-
 [node name="Sprite" type="Sprite" parent="map"]
 visible = false
 position = Vector2( 357.737, 282.986 )
@@ -422,7 +402,7 @@ texture = ExtResource( 8 )
 
 [node name="work" type="Sprite" parent="map/markers"]
 material = SubResource( 11 )
-position = Vector2( 130.855, 118.054 )
+position = Vector2( 132.855, 118.054 )
 texture = ExtResource( 9 )
 
 [node name="home" type="Sprite" parent="map/markers"]
