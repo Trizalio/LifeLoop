@@ -36,8 +36,6 @@ animations = [ {
 [node name="home" type="Node"]
 script = ExtResource( 4 )
 
-[node name="bars" parent="." instance=ExtResource( 7 )]
-
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -115.472, 0 )
 frames = SubResource( 1 )
@@ -80,3 +78,5 @@ texture = ExtResource( 5 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
 autoplay = true
+
+[node name="bars" parent="." instance=ExtResource( 7 )]
