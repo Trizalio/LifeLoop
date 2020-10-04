@@ -4,16 +4,16 @@
 [ext_resource path="res://art/audio/tick-tock.wav" type="AudioStream" id=2]
 [ext_resource path="res://fonts/PressStart2P-Regular.ttf" type="DynamicFontData" id=3]
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 3 )
 
-[sub_resource type="InputEventAction" id=1]
+[sub_resource type="InputEventAction" id=2]
 action = "ui_accept"
 
-[sub_resource type="ShortCut" id=2]
-shortcut = SubResource( 1 )
+[sub_resource type="ShortCut" id=3]
+shortcut = SubResource( 2 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Fader:color")
@@ -81,9 +81,9 @@ alignment = 1
 margin_top = 259.0
 margin_right = 412.0
 margin_bottom = 281.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 1 )
 keep_pressed_outside = true
-shortcut = SubResource( 2 )
+shortcut = SubResource( 3 )
 text = "Press any button to start"
 flat = true
 
@@ -101,7 +101,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/fade = SubResource( 3 )
+anims/fade = SubResource( 4 )
 
 [node name="tick_tack_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )
