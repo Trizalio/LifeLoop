@@ -42,3 +42,7 @@ position = Vector2( 663.11, 338.879 )
 texture = ExtResource( 3 )
 
 [node name="time" parent="." instance=ExtResource( 7 )]
+margin_left = 11.0622
+margin_top = 9.76337
+margin_right = 120.062
+margin_bottom = 53.7634
