@@ -26,14 +26,8 @@ var items = [
 	ResoureChange.new('bottle', -small_effect, small_effect, no_effect),
 ]
 var name_to_items = {}
+var day_to_buildings = {}
 
-#const day_to_buildings = {
-#	1: ['bar'],
-#	2: ['grocery_store', 'park'],
-#	3: ['grocery_store', 'park', 'gym'],
-#	4: ['grocery_store', 'park', 'gym', 'bar', 'clothing_store'],
-#	5: ['grocery_store', 'park', 'gym', 'bar', 'clothing_store', 'jewelry_store', 'strip_club'],
-#}
 
 class ResoureChange:
 	var title: String = ''
@@ -64,6 +58,16 @@ func _ready():
 	for i in len(items):
 		var item: ResoureChange = items[i]
 		name_to_items[item.title] = item
+	
+	var day_to_buildings = {
+		1: [name_to_building.bar, name_to_building.grocery_store],
+		2: [name_to_building.bar],
+	#	1: ['bar'],
+	#	2: ['grocery_store', 'park'],
+	#	3: ['grocery_store', 'park', 'gym'],
+	#	4: ['grocery_store', 'park', 'gym', 'bar', 'clothing_store'],
+	#	5: ['grocery_store', 'park', 'gym', 'bar', 'clothing_store', 'jewelry_store', 'strip_club'],
+	}
 	
 func start_new_game():
 	money = 50
@@ -101,7 +105,7 @@ func return_to_office():
 
 func got_to_office():
 	get_node('/root/office').limit_selectable_objects_to([
-		'lamp', 'printer', 'whiteboard_office', 'ball'
+		'lamp', 'printer', 'whiteboard', 'ball'
 	])
 	if got_to_office_from_work:
 		got_to_office_from_work = false
@@ -179,5 +183,5 @@ func gone_from_office():
 	var city = get_node("/root/city")
 	city.connect("building_used", self, "on_building_used")
 	print('city.connect("building_used", self, "on_building_used")')
-	city.start_at_office(['home',  'bar'])
+	city.start_at_office(day_to_buildings[current_day])
 	
