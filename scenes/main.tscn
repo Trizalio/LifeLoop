@@ -1,7 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/main.gd" type="Script" id=1]
 [ext_resource path="res://art/audio/tick-tock.wav" type="AudioStream" id=2]
+
+[sub_resource type="InputEventAction" id=2]
+action = "ui_accept"
+
+[sub_resource type="ShortCut" id=3]
+shortcut = SubResource( 2 )
 
 [sub_resource type="Animation" id=1]
 resource_name = "fade"
@@ -72,6 +78,9 @@ alignment = 1
 margin_top = 260.0
 margin_right = 169.0
 margin_bottom = 280.0
+focus_mode = 0
+enabled_focus_mode = 0
+shortcut = SubResource( 3 )
 text = "Press any button to start"
 flat = true
 
