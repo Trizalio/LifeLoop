@@ -8,7 +8,7 @@ var medium_effect: float = 10
 var strong_effect: float = 15
 
 var money_per_sheet: float = 1
-var stress_per_mistake: float = 1
+var stress_per_mistake: float = -1
 
 var buildings = [
 	ResourseChange.new('park', no_effect, no_effect, no_effect),
@@ -23,7 +23,12 @@ var name_to_building = {}
 
 
 var home_items = [
+	ResourseChange.new('bookshelf', no_effect, no_effect, no_effect),
+	ResourseChange.new('tv', no_effect, no_effect, no_effect),
+	ResourseChange.new('crack', no_effect, no_effect, no_effect),
+	ResourseChange.new('bed', no_effect, no_effect, no_effect),
 	ResourseChange.new('bottle', -small_effect, small_effect, no_effect),
+	ResourseChange.new('sink', no_effect, no_effect, no_effect),
 ]
 var name_to_home_items = {}
 
@@ -31,6 +36,11 @@ var name_to_home_items = {}
 var office_items = [
 	ResourseChange.new('correct_sheet', money_per_sheet, no_effect, no_effect),
 	ResourseChange.new('mistake_sheet', no_effect, stress_per_mistake, no_effect),
+	ResourseChange.new('printer', no_effect, no_effect, no_effect),
+	ResourseChange.new('pc', no_effect, no_effect, no_effect),
+	ResourseChange.new('lamp', no_effect, no_effect, no_effect),
+	ResourseChange.new('whiteboard', no_effect, no_effect, no_effect),
+	ResourseChange.new('ball', no_effect, no_effect, no_effect),
 ]
 var name_to_office_item = {}
 
@@ -157,11 +167,15 @@ func on_building_used(building_name: String):
 	var building_data: ResourseChange = name_to_building[building_name]
 	modify_resourses(building_data)
 												
-func used_item(item_name):
+func used_home_item(item_name):
 	if item_name == 'bed':
 		go_to_office()
 		return
 	var item_data: ResourseChange = name_to_home_items[item_name]
+	modify_resourses(item_data)
+												
+func used_office_item(item_name):
+	var item_data: ResourseChange = name_to_office_item[item_name]
 	modify_resourses(item_data)
 
 func modify_resourses(resource_change: ResourseChange):
@@ -181,7 +195,7 @@ func modify_resourses(resource_change: ResourseChange):
 	emit_signal("resources_changed")
 
 func game_over(ending_name: String):
-	pass
+	SceneChanger.goto_scene("res://scenes/epilogue.tscn")
 
 func came_home():
 	SceneChanger.goto_scene("res://scenes/home.tscn")

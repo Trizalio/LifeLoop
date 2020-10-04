@@ -16,32 +16,29 @@ func _input(event):
 	elif user_selection_input == InputController.UserSelectionInput.use:
 #		use_seal()
 		if selected_object != null:
+			GameStatus.used_office_item(selected_object.name)
+			var sound = selected_object.get_node('sound')
+			if sound is AudioStreamPlayer2D:
+				sound.play()
 			if selected_object.name == 'whiteboard':
 				SceneChanger.goto_scene("res://scenes/work.tscn")
 		
 func _ready():
 	selected_object_index = 0
-	scene_objects = $items.get_children()
-#	scene_objects = [
-#		get_node("items/ball"),
-#		get_node("items/whiteboard_office"),
-#		get_node("items/pc"),
-#		get_node("items/lamp"),
-#		get_node("items/printer"),
-#	]
-	select_object(0)
+	limit_selectable_objects_to()
 	GameStatus.got_to_office()
 	GameStatus.set_office_time($time)
 
-func limit_selectable_objects_to(object_names):
+func limit_selectable_objects_to(object_names = null):
 	print('limit_selectable_objects_to: ', object_names)
 	var new_scene_objects = []
-	for i in len(scene_objects):
-		var object = scene_objects[i]
-		if object.name in object_names:
+	var items = $items.get_children()
+	for i in len(items):
+		var object = items[i]
+		if object_names == null or object.name in object_names:
 			new_scene_objects.append(object)
 	scene_objects = new_scene_objects
-	select_object(0)
+	select_object(int(len(scene_objects) / 2))
 
 func select_object(new_object_index: int):
 	new_object_index = new_object_index % len(scene_objects)

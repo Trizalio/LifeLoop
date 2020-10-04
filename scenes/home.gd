@@ -15,12 +15,14 @@ func _input(event):
 		select_object(selected_object_index + 1)
 	elif user_selection_input == InputController.UserSelectionInput.use:
 		if selected_object != null:
-			GameStatus.used_item(selected_object.name)
+			GameStatus.used_home_item(selected_object.name)
+			var sound = selected_object.get_node('sound')
+			if sound is AudioStreamPlayer2D:
+				sound.play()
 		
 func _ready():
 	selected_object_index = 0
-	scene_objects = $items.get_children()
-	select_object(0)
+	limit_selectable_objects_to()
 
 func select_object(new_object_index: int):
 	print('select_object', new_object_index)
@@ -33,12 +35,13 @@ func select_object(new_object_index: int):
 	selected_object.use_parent_material = true
 	selected_object_index = new_object_index
 
-func limit_selectable_objects_to(object_names):
+func limit_selectable_objects_to(object_names = null):
 	print('limit_selectable_objects_to: ', object_names)
 	var new_scene_objects = []
-	for i in len(scene_objects):
-		var object = scene_objects[i]
-		if object.name in object_names:
+	var items = $items.get_children()
+	for i in len(items):
+		var object = items[i]
+		if object_names == null or object.name in object_names:
 			new_scene_objects.append(object)
 	scene_objects = new_scene_objects
-	select_object(0)
+	select_object(int(len(scene_objects) / 2))

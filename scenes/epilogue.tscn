@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://art/audio/epilogue.wav" type="AudioStream" id=1]
-[ext_resource path="res://scenes/alarm.gd" type="Script" id=2]
+[ext_resource path="res://scenes/epilogue.gd" type="Script" id=2]
 [ext_resource path="res://art/epilogue_bg.png" type="Texture" id=3]
 [ext_resource path="res://fonts/PressStart2P-Regular.ttf" type="DynamicFontData" id=6]
 
@@ -11,7 +11,7 @@ outline_size = 2
 outline_color = Color( 0.00784314, 0.00784314, 0.00784314, 1 )
 font_data = ExtResource( 6 )
 
-[node name="alarm" type="Node"]
+[node name="epilogue" type="Node"]
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_vertical_guides_": [ 800.192, 400.144 ]
@@ -36,6 +36,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
 autoplay = true

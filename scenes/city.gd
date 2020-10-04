@@ -10,7 +10,11 @@ func _input(event):
 	var user_selection_input = InputController.get_selection_from_event(event)
 	if user_selection_input == InputController.UserSelectionInput.use:
 		if selected_marker:
-			emit_signal('building_used', selected_marker.name)
+			# emit_signal('building_used', selected_marker.name)
+			GameStatus.on_building_used(selected_marker.name)
+			var sound = selected_marker.get_node('sound')
+			if sound is AudioStreamPlayer2D:
+				sound.play()
 
 var marker_nodes = []
 var player = null
