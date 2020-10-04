@@ -6,12 +6,12 @@
 animations = [ {
 "frames": [  ],
 "loop": true,
-"name": "died",
+"name": "no_money",
 "speed": 5.0
 }, {
 "frames": [  ],
 "loop": true,
-"name": "no_money",
+"name": "died",
 "speed": 5.0
 }, {
 "frames": [  ],
