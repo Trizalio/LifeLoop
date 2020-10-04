@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://art/seals/red.png" type="Texture" id=1]
 [ext_resource path="res://art/sheets/arrows_red3.png" type="Texture" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://art/sheets/arrows_green3.png" type="Texture" id=23]
 [ext_resource path="res://art/sheets/arrows_red.png" type="Texture" id=24]
 [ext_resource path="res://art/audio/office.wav" type="AudioStream" id=25]
+[ext_resource path="res://art/sheets/hud_x.png" type="Texture" id=26]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -190,8 +191,9 @@ material = ExtResource( 17 )
 
 [node name="exit" type="Sprite" parent="seals"]
 modulate = Color( 0.403922, 0.403922, 0.403922, 1 )
-position = Vector2( 98.3629, 230.407 )
-texture = ExtResource( 5 )
+position = Vector2( 31.8866, 29.431 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 26 )
 
 [node name="green" type="Sprite" parent="seals"]
 modulate = Color( 0.596078, 1, 0.592157, 1 )
@@ -217,8 +219,13 @@ stream = ExtResource( 6 )
 stream = ExtResource( 4 )
 
 [node name="bars" parent="." instance=ExtResource( 15 )]
+visible = false
+margin_left = 3.49585
+margin_right = 3.49585
 
 [node name="time" parent="." instance=ExtResource( 18 )]
+margin_left = 680.0
+margin_right = 791.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 25 )
