@@ -30,15 +30,20 @@ centered = false
 [node name="items" type="Node2D" parent="."]
 material = ExtResource( 4 )
 
-[node name="lamp" type="Sprite" parent="items"]
-position = Vector2( 423.526, 139.142 )
-scale = Vector2( 0.826482, 0.826482 )
-texture = ExtResource( 2 )
-
 [node name="printer" type="Sprite" parent="items"]
 position = Vector2( -54.524, 230.615 )
 scale = Vector2( 0.821086, 0.821086 )
 texture = ExtResource( 9 )
+
+[node name="pc" type="Sprite" parent="items"]
+position = Vector2( 299.422, 170.658 )
+scale = Vector2( 0.82437, 0.82437 )
+texture = ExtResource( 1 )
+
+[node name="lamp" type="Sprite" parent="items"]
+position = Vector2( 423.526, 139.142 )
+scale = Vector2( 0.826482, 0.826482 )
+texture = ExtResource( 2 )
 
 [node name="whiteboard" type="Sprite" parent="items"]
 position = Vector2( 640.897, 147.411 )
@@ -49,11 +54,6 @@ texture = ExtResource( 10 )
 visible = false
 position = Vector2( 663.11, 338.879 )
 texture = ExtResource( 3 )
-
-[node name="pc" type="Sprite" parent="items"]
-position = Vector2( 299.422, 170.658 )
-scale = Vector2( 0.82437, 0.82437 )
-texture = ExtResource( 1 )
 
 [node name="time" parent="." instance=ExtResource( 7 )]
 margin_left = 11.0622
