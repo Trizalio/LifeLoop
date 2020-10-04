@@ -16,8 +16,8 @@ var marker_nodes = []
 var player = null
 var selected_marker = null
 
-export (Vector2) var home_position = Vector2(594, 517)
-export (Vector2) var work_position = Vector2(211, 151)
+export (Vector2) var home_position = Vector2(596, 448)
+export (Vector2) var work_position = Vector2(195, 156)
 export (float) var marker_select_range = 100
 export (float) var marker_glow_power = 5
 export (float) var default_marker_glow_power = 0.5
@@ -30,7 +30,9 @@ func come_to_office(buildings_to_act):
 	print('come_to_office')
 	var player = get_node("map/player")
 	player.blink_to_destination(home_position)
-	player.move_to_destination(Vector2(594, 152))
+	player.move_to_destination(Vector2(362, 447))
+	yield(player, 'destination_reached')
+	player.move_to_destination(Vector2(359, 158))
 	yield(player, 'destination_reached')
 	player.move_to_destination(work_position)
 	yield(player, 'destination_reached')
