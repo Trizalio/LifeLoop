@@ -84,7 +84,7 @@ func try_find(location: String):
 		node.print_tree()
 	
 
-var seconds_in_office = 3
+var seconds_in_office = 30
 var time_steps = 9
 var day_start_time = 9
 var current_time_step = 0

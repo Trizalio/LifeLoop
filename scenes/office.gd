@@ -16,7 +16,7 @@ func _input(event):
 	elif user_selection_input == InputController.UserSelectionInput.use:
 #		use_seal()
 		if selected_object != null:
-			if selected_object.name == 'papers':
+			if selected_object.name == 'whiteboard_office':
 				SceneChanger.goto_scene("res://scenes/work.tscn")
 		
 func _ready():
