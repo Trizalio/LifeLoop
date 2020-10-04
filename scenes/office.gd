@@ -28,6 +28,7 @@ func _ready():
 	]
 	select_object(0)
 	GameStatus.got_to_office()
+	GameStatus.set_office_time($time)
 
 func select_object(new_object_index: int):
 	new_object_index = new_object_index % len(scene_objects)

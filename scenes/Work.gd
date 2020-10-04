@@ -37,10 +37,12 @@ func _ready():
 		get_node("seals/blue"),
 		get_node("seals/red"),
 		get_node("seals/green"),
+		get_node("seals/exit"),
 	]
 	select_object(0)
 	select_rules()
 	get_next_sheet()
+	GameStatus.set_office_time($time)
 	
 func select_object(new_object_index: int):
 	new_object_index = new_object_index % len(scene_objects)
@@ -53,9 +55,12 @@ func select_object(new_object_index: int):
 	selected_object_index = new_object_index
 	
 func use_seal():
+	var seal_color_name = selected_object.name
+	if seal_color_name == 'exit':
+		GameStatus.return_to_office()
+		
 	if sheet_animation.is_playing():
 		return
-	var seal_color_name = selected_object.name
 	if check_seal(seal_color_name):
 		audio_positive.play()
 	else:
