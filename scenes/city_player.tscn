@@ -37,9 +37,9 @@ script = ExtResource( 5 )
 [node name="Sprite" type="AnimatedSprite" parent="."]
 modulate = Color( 0.478431, 0.498039, 0.576471, 1 )
 material = ExtResource( 4 )
-scale = Vector2( 0.7, 0.7 )
+scale = Vector2( 0.2, 0.2 )
 frames = SubResource( 1 )
-animation = "down"
+animation = "up"
 
 [node name="FrontCollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
