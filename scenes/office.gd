@@ -16,6 +16,11 @@ func _input(event):
 	elif user_selection_input == InputController.UserSelectionInput.use:
 #		use_seal()
 		if selected_object != null:
+			if selected_object.name == 'lamp':
+				if $Sprite.animation == 'lighting':
+					$Sprite.animation = 'default'
+				else:
+					$Sprite.animation = 'lighting'
 			GameStatus.used_office_item(selected_object.name)
 			var sound = selected_object.get_node('sound')
 			if sound is AudioStreamPlayer2D:
