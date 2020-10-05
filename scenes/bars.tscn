@@ -95,7 +95,7 @@ custom_styles/fg = SubResource( 1 )
 value = 30.0
 percent_visible = false
 
-[node name="Label" type="Label" parent="vbox/bars/money"]
+[node name="label" type="Label" parent="vbox/bars/money"]
 margin_left = 5.6
 margin_top = 3.7
 margin_right = 45.6
@@ -108,7 +108,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="family" type="ProgressBar" parent="vbox/bars"]
+[node name="stress" type="ProgressBar" parent="vbox/bars"]
 margin_left = 254.0
 margin_right = 504.0
 margin_bottom = 15.0
@@ -118,7 +118,7 @@ custom_styles/fg = SubResource( 3 )
 value = 50.0
 percent_visible = false
 
-[node name="Label3" type="Label" parent="vbox/bars/family"]
+[node name="label" type="Label" parent="vbox/bars/stress"]
 margin_left = 5.67199
 margin_top = 3.7
 margin_right = 45.672
@@ -131,7 +131,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="stress" type="ProgressBar" parent="vbox/bars"]
+[node name="family" type="ProgressBar" parent="vbox/bars"]
 margin_left = 508.0
 margin_right = 760.0
 margin_bottom = 15.0
@@ -144,7 +144,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label2" type="Label" parent="vbox/bars/stress"]
+[node name="label" type="Label" parent="vbox/bars/family"]
 margin_left = 5.6
 margin_top = 3.7
 margin_right = 45.6
