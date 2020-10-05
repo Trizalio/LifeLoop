@@ -17,6 +17,7 @@ func _ready():
 func goto_scene(path, fade_in_time: float = 0.2, fade_out_time: float = 0.2):
 	if is_changing_scene():
 		return
+	print('change scene to:', path)
 	# This function will usually be called from a signal callback,
 	# or some other function in the current scene.
 	# Deleting the current scene at this point is
@@ -51,4 +52,5 @@ func _deferred_goto_scene(path):
 	
 	# Optionally, to make it compatible with the SceneTree.change_scene() API.
 	get_tree().set_current_scene(current_scene)
+	print('scene changed to: ', current_scene, '(', path, ')')
 	emit_signal("scene_changed")

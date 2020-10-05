@@ -7,8 +7,9 @@ var small_effect: float = 5
 var medium_effect: float = 10
 var strong_effect: float = 15
 
-var money_per_sheet: float = 1
-var stress_per_mistake: float = -1
+var money_per_sheet: float = 5
+var stress_per_sheet: float = -2
+var stress_per_mistake: float = -5
 
 var buildings = [
 	ResourseChange.new('park', no_effect, no_effect, no_effect),
@@ -35,7 +36,7 @@ var time_steps_to_home_items = {}
 
 
 var office_items = [
-	ResourseChange.new('correct_sheet', money_per_sheet, no_effect, no_effect),
+	ResourseChange.new('correct_sheet', money_per_sheet, stress_per_sheet, no_effect),
 	ResourseChange.new('mistake_sheet', no_effect, stress_per_mistake, no_effect),
 	ResourseChange.new('printer', no_effect, no_effect, no_effect),
 	ResourseChange.new('pc', no_effect, no_effect, no_effect),
@@ -210,10 +211,12 @@ func on_building_used(building_name: String):
 	increment_time()
 												
 func used_home_item(item_name):
+	var item_data: ResourseChange = name_to_home_items[item_name]
 	if item_name == 'bed':
+		item_data.stress_effect = (22 - current_time_step) * 10
+		modify_resourses(item_data)
 		start_new_day()
 		return
-	var item_data: ResourseChange = name_to_home_items[item_name]
 	modify_resourses(item_data)
 	increment_time()
 												
@@ -223,8 +226,8 @@ func used_office_item(item_name):
 	increment_time()
 
 func modify_resourses(resource_change: ResourseChange):
-	print('modify_resourses', resource_change.title, 
-			resource_change.money_effect, resource_change.stress_effect,
+	print('modify_resourses', resource_change.title, ', ',
+			resource_change.money_effect, ', ', resource_change.stress_effect, ', ',
 			resource_change.family_effect)
 	resource_change.times_used += 1
 	money += resource_change.money_effect
