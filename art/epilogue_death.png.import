@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/epilogue_mental.png-0298388bcd41288283417c814c991a38.stex"
+path="res://.import/epilogue_death.png-58e5959571b217a407623cf13952ec7e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/epilogue_mental.png"
-dest_files=[ "res://.import/epilogue_mental.png-0298388bcd41288283417c814c991a38.stex" ]
+source_file="res://art/epilogue_death.png"
+dest_files=[ "res://.import/epilogue_death.png-58e5959571b217a407623cf13952ec7e.stex" ]
 
 [params]
 

@@ -4,7 +4,10 @@ func _ready():
 	pass
 	
 func set_reason(resaon_name: String):
-	$epilogue_bg.animation = resaon_name
+	var node_to_show: Sprite = get_node(resaon_name)
+	if node_to_show == null:
+		node_to_show = $stress
+	node_to_show.visible = true
 
 func _input(event):
 #	print(event)

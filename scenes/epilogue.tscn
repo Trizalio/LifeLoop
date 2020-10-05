@@ -1,31 +1,13 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://art/audio/epilogue.wav" type="AudioStream" id=1]
 [ext_resource path="res://scenes/epilogue.gd" type="Script" id=2]
-[ext_resource path="res://art/epilogue_mental.png" type="Texture" id=3]
+[ext_resource path="res://art/epilogue_death.png" type="Texture" id=3]
 [ext_resource path="res://art/epilogue_money.png" type="Texture" id=4]
 [ext_resource path="res://art/epilogue_family.png" type="Texture" id=5]
 [ext_resource path="res://fonts/PressStart2P-Regular.ttf" type="DynamicFontData" id=6]
 
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"frames": [ ExtResource( 3 ) ],
-"loop": true,
-"name": "mental",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 5 ) ],
-"loop": true,
-"name": "family",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "money",
-"speed": 5.0
-} ]
-
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 40
 outline_size = 2
 outline_color = Color( 0.00784314, 0.00784314, 0.00784314, 1 )
@@ -37,11 +19,20 @@ __meta__ = {
 "_edit_vertical_guides_": [ 800.192, 400.144 ]
 }
 
-[node name="epilogue_bg" type="AnimatedSprite" parent="."]
-position = Vector2( 373, 191 )
-scale = Vector2( 1.52724, 1.52724 )
-frames = SubResource( 1 )
-animation = "mental"
+[node name="money" type="Sprite" parent="."]
+visible = false
+position = Vector2( 400, 300 )
+texture = ExtResource( 4 )
+
+[node name="family" type="Sprite" parent="."]
+visible = false
+position = Vector2( 400, 300 )
+texture = ExtResource( 5 )
+
+[node name="stress" type="Sprite" parent="."]
+visible = false
+position = Vector2( 400, 253 )
+texture = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="."]
 margin_left = 102.466
@@ -49,7 +40,7 @@ margin_top = 147.489
 margin_right = 702.466
 margin_bottom = 187.489
 rect_pivot_offset = Vector2( 302.396, 18.3371 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "Broke the loop"
 align = 1
 valign = 1
