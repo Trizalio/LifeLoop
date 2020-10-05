@@ -54,7 +54,8 @@ class ResourseChange:
 	var money_effect: float = 0
 	var stress_effect: float = 0
 	var family_effect: float = 0
-	var times_used: int = 0
+	var total_times_used: int = 0
+	var day_times_used: int = 0
 	
 	func _init(_title: String, _money_effect: float, _stress_effect: float, _family_effect: float):
 #		print('_init: ', new_nickname, " ", new_id, " ", new_achievements)
@@ -62,7 +63,11 @@ class ResourseChange:
 		money_effect = _money_effect
 		stress_effect = _stress_effect
 		family_effect = _family_effect
-		times_used = 0
+		total_times_used = 0
+		day_times_used = 0
+		
+	func on_new_day():
+		day_times_used = 0
 
 #var ResourseBars = preload("res://scenes/bars.tscn")
 signal resources_changed
@@ -73,18 +78,24 @@ var family: float = 50
 
 var resourse_bars = null
 
-func prepare_changes():
+func prepare_changes(clear_total: bool = true):
 	for i in len(buildings):
 		var building: ResourseChange = buildings[i]
-		building.times_used = 0
+		if clear_total:
+			building.total_times_used = 0
+		building.day_times_used = 0
 		name_to_building[building.title] = building
 	for i in len(home_items):
 		var item: ResourseChange = home_items[i]
-		item.times_used = 0
+		if clear_total:
+			item.total_times_used = 0
+		item.day_times_used = 0
 		name_to_home_items[item.title] = item
 	for i in len(office_items):
 		var item: ResourseChange = office_items[i]
-		item.times_used = 0
+		if clear_total:
+			item.total_times_used = 0
+		item.day_times_used = 0
 		name_to_office_item[item.title] = item
 
 func _ready():
@@ -121,13 +132,7 @@ func start_new_game():
 func end_game():
 #	get_node("/root").remove_child(resourse_bars)
 	pass
-	
-func try_find(location: String):
-	var node = get_node(location)
-	print(location, ": ", node)
-	if node != null:
-		node.print_tree()
-	
+	pass
 
 #var seconds_in_office = 30
 var day_start_time_step = 9
@@ -147,24 +152,32 @@ func set_location(location_name: String):
 func increment_time():
 	current_time_step += 1
 	emit_signal('time_step_changed')
-	if current_time_step < final_time_step_in_office:
-		pass
-	elif current_time_step == final_time_step_in_office:
-		gone_from_office()
-	else:
-		if location == 'city':
-			var objects = []
-			if current_time_step in time_steps_to_buildings:
-				objects = time_steps_to_buildings[current_time_step]
-			var city = get_node("/root/city")
-			city.limit_selectable_objects_to(objects)
-		if location == 'home':
-			var objects = []
-			if current_time_step in time_steps_to_home_items:
-				objects = time_steps_to_home_items[current_time_step]
-			var home = get_node("/root/home")
-			home.limit_selectable_objects_to(objects)
-			
+	if location == 'home':
+		var home = get_node("/root/home")
+		home.limit_selectable_objects_to(get_home_items())
+	if location == 'city':
+		var objects = []
+		if current_time_step in time_steps_to_buildings:
+			objects = time_steps_to_buildings[current_time_step]
+		var city = get_node("/root/city")
+		city.limit_selectable_objects_to(objects)
+	if location == 'office':
+		if current_time_step < final_time_step_in_office:
+			pass
+		elif current_time_step == final_time_step_in_office:
+			gone_from_office()
+
+func get_home_items():
+	var objects = []
+	if current_time_step in time_steps_to_home_items:
+		objects = time_steps_to_home_items[current_time_step]
+	if 'sink' in objects:
+		if name_to_home_items['sink'].day_times_used > 0:
+			objects.erase('sink')
+	print('get_home_items: ', objects)
+	if objects:
+		return objects
+
 func return_to_office():
 	got_to_office_from_work = true
 	SceneChanger.goto_scene("res://scenes/office.tscn")
@@ -190,6 +203,7 @@ func got_to_office():
 
 func start_new_day():
 	current_time_step = day_start_time_step
+	prepare_changes()
 	emit_signal('time_step_changed')
 	go_to_office()
 	
@@ -229,7 +243,8 @@ func modify_resourses(resource_change: ResourseChange):
 	print('modify_resourses', resource_change.title, ', ',
 			resource_change.money_effect, ', ', resource_change.stress_effect, ', ',
 			resource_change.family_effect)
-	resource_change.times_used += 1
+	resource_change.total_times_used += 1
+	resource_change.day_times_used += 1
 	money += resource_change.money_effect
 	stress += resource_change.stress_effect
 	family += resource_change.family_effect
@@ -248,10 +263,7 @@ func came_home():
 	SceneChanger.goto_scene("res://scenes/home.tscn")
 	yield(SceneChanger, "scene_changed")
 	var home = get_node("/root/home")
-	var objects = []
-	if current_time_step in time_steps_to_home_items:
-		objects = time_steps_to_home_items[current_time_step]
-	home.limit_selectable_objects_to(objects)
+	home.limit_selectable_objects_to(get_home_items())
 
 func work_done(result_is_correct):
 	if result_is_correct:
