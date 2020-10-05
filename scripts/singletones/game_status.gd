@@ -184,7 +184,7 @@ func return_to_office():
 
 func got_to_office():
 	get_node('/root/office').limit_selectable_objects_to([
-		'lamp', 'printer', 'whiteboard', 'pc'
+		'lamp', 'printer', 'whiteboard', 'pc', 'ball'
 	])
 #	if got_to_office_from_work:
 #		got_to_office_from_work = false
