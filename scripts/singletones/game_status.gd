@@ -60,8 +60,16 @@ class ResourseChange:
 	func _init(_title: String, _money_effect: float, _stress_effect: float, _family_effect: float):
 #		print('_init: ', new_nickname, " ", new_id, " ", new_achievements)
 		title = _title
+		if _money_effect > 0:
+			_money_effect *= 0.7
 		money_effect = _money_effect
+		if _stress_effect > 0:
+			_stress_effect *= 0.6
+		else:
+			_stress_effect *= 1.2
 		stress_effect = _stress_effect
+		if _family_effect > 0:
+			_family_effect *= 0.7
 		family_effect = _family_effect
 		total_times_used = 0
 		day_times_used = 0
@@ -239,7 +247,7 @@ func on_building_used(building_name: String):
 func used_home_item(item_name):
 	var item_data: ResourseChange = name_to_home_items[item_name]
 	if item_name == 'bed':
-		item_data.stress_effect = (22 - current_time_step) * 10
+		item_data.stress_effect = (24 - current_time_step) * 5
 		modify_resourses(item_data)
 		start_new_day()
 		return

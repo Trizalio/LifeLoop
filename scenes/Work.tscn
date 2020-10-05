@@ -1,27 +1,27 @@
 [gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://scenes/work.gd" type="Script" id=1]
-[ext_resource path="res://scenes/glow.tres" type="Material" id=2]
-[ext_resource path="res://art/audio/office.wav" type="AudioStream" id=3]
-[ext_resource path="res://art/sheets/sheet_green.png" type="Texture" id=4]
-[ext_resource path="res://art/audio/positive.wav" type="AudioStream" id=5]
+[ext_resource path="res://art/sheets/sheet_red.png" type="Texture" id=2]
+[ext_resource path="res://art/office/whiteboard_work.png" type="Texture" id=3]
+[ext_resource path="res://art/seals/stamp_blue.png" type="Texture" id=4]
+[ext_resource path="res://art/sheets/hud_x.png" type="Texture" id=5]
 [ext_resource path="res://art/seals/green.png" type="Texture" id=6]
-[ext_resource path="res://art/audio/negative.wav" type="AudioStream" id=7]
-[ext_resource path="res://art/office/whiteboard_work.png" type="Texture" id=8]
-[ext_resource path="res://art/sheets/sheet_blue.png" type="Texture" id=9]
-[ext_resource path="res://art/sheets/sheet_red.png" type="Texture" id=10]
-[ext_resource path="res://art/sheets/hud_x.png" type="Texture" id=11]
-[ext_resource path="res://art/office/heap_left.png" type="Texture" id=12]
-[ext_resource path="res://art/seals/stamp_blue.png" type="Texture" id=13]
-[ext_resource path="res://icon.png" type="Texture" id=14]
-[ext_resource path="res://art/seals/stamp_red.png" type="Texture" id=15]
-[ext_resource path="res://art/office/heap_right.png" type="Texture" id=16]
-[ext_resource path="res://art/seals/stamp_green.png" type="Texture" id=19]
-[ext_resource path="res://art/seals/blue.png" type="Texture" id=22]
-[ext_resource path="res://art/seals/red.png" type="Texture" id=23]
-[ext_resource path="res://scenes/bars.tscn" type="PackedScene" id=24]
-[ext_resource path="res://art/office/work_minigame.png" type="Texture" id=25]
-[ext_resource path="res://art/office/officeDesk2.png" type="Texture" id=27]
+[ext_resource path="res://art/office/heap_left.png" type="Texture" id=7]
+[ext_resource path="res://art/audio/positive.wav" type="AudioStream" id=8]
+[ext_resource path="res://art/audio/office.wav" type="AudioStream" id=9]
+[ext_resource path="res://art/sheets/sheet_blue.png" type="Texture" id=10]
+[ext_resource path="res://art/seals/blue.png" type="Texture" id=11]
+[ext_resource path="res://art/office/heap_right.png" type="Texture" id=12]
+[ext_resource path="res://art/seals/red.png" type="Texture" id=13]
+[ext_resource path="res://art/office/work_minigame.png" type="Texture" id=14]
+[ext_resource path="res://art/sheets/sheet_green.png" type="Texture" id=15]
+[ext_resource path="res://art/seals/stamp_green.png" type="Texture" id=16]
+[ext_resource path="res://art/office/officeDesk2.png" type="Texture" id=17]
+[ext_resource path="res://art/seals/stamp_red.png" type="Texture" id=18]
+[ext_resource path="res://icon.png" type="Texture" id=19]
+[ext_resource path="res://art/audio/negative.wav" type="AudioStream" id=20]
+[ext_resource path="res://scenes/glow.tres" type="Material" id=21]
+[ext_resource path="res://scenes/bars.tscn" type="PackedScene" id=22]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -33,7 +33,7 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 9 ), ExtResource( 4 ), ExtResource( 10 ) ],
+"frames": [ ExtResource( 10 ), ExtResource( 15 ), ExtResource( 2 ) ],
 "loop": true,
 "name": "sheets",
 "speed": 0.0
@@ -41,7 +41,7 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 22 ) ],
+"frames": [ ExtResource( 11 ) ],
 "loop": true,
 "name": "blue",
 "speed": 5.0
@@ -51,7 +51,7 @@ animations = [ {
 "name": "green",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 23 ) ],
+"frames": [ ExtResource( 13 ) ],
 "loop": true,
 "name": "red",
 "speed": 5.0
@@ -116,19 +116,19 @@ __meta__ = {
 [node name="officeDesk2" type="Sprite" parent="ColorRect"]
 visible = false
 position = Vector2( 3.26648, 3.95569 )
-texture = ExtResource( 27 )
+texture = ExtResource( 17 )
 centered = false
 
 [node name="work_minigame" type="Sprite" parent="ColorRect"]
 position = Vector2( 400.921, 268.815 )
-texture = ExtResource( 25 )
+texture = ExtResource( 14 )
 centered = false
 offset = Vector2( -520.921, -268.815 )
 
 [node name="whiteboard_work" type="Sprite" parent="ColorRect"]
 position = Vector2( 471.693, 192.094 )
 scale = Vector2( 0.829976, 0.829976 )
-texture = ExtResource( 8 )
+texture = ExtResource( 3 )
 
 [node name="rules" type="Node2D" parent="."]
 position = Vector2( 400, 150 )
@@ -164,7 +164,7 @@ animation = "blue"
 visible = false
 position = Vector2( 650, 440 )
 scale = Vector2( 2.1, 2.97 )
-texture = ExtResource( 14 )
+texture = ExtResource( 19 )
 
 [node name="draw_pile2" type="TextureRect" parent="sheets"]
 margin_left = 72.0
@@ -173,7 +173,7 @@ margin_right = 227.0
 margin_bottom = 536.0
 rect_scale = Vector2( 0.9, 0.9 )
 rect_pivot_offset = Vector2( 80, 92.5 )
-texture = ExtResource( 12 )
+texture = ExtResource( 7 )
 expand = true
 stretch_mode = 6
 __meta__ = {
@@ -187,7 +187,7 @@ margin_right = 726.845
 margin_bottom = 536.0
 rect_scale = Vector2( 0.9, 0.9 )
 rect_pivot_offset = Vector2( 80, 92.5 )
-texture = ExtResource( 16 )
+texture = ExtResource( 12 )
 expand = true
 stretch_mode = 6
 __meta__ = {
@@ -199,45 +199,45 @@ process_priority = -46
 anims/sheet_move = SubResource( 4 )
 
 [node name="seals" type="Node2D" parent="."]
-material = ExtResource( 2 )
+material = ExtResource( 21 )
 
 [node name="exit" type="Sprite" parent="seals"]
 modulate = Color( 0.403922, 0.403922, 0.403922, 1 )
 position = Vector2( 31.8866, 29.431 )
 scale = Vector2( 1.5, 1.5 )
-texture = ExtResource( 11 )
-
-[node name="green" type="Sprite" parent="seals"]
-modulate = Color( 0.596078, 1, 0.592157, 1 )
-position = Vector2( 466.379, 387.308 )
-scale = Vector2( 0.35, 0.35 )
-texture = ExtResource( 19 )
-
-[node name="blue" type="Sprite" parent="seals"]
-use_parent_material = true
-position = Vector2( 408, 388.218 )
-scale = Vector2( 0.35, 0.35 )
-texture = ExtResource( 13 )
+texture = ExtResource( 5 )
 
 [node name="red" type="Sprite" parent="seals"]
 modulate = Color( 1, 0.545098, 0.545098, 1 )
 position = Vector2( 345.5, 389.214 )
 scale = Vector2( 0.35, 0.35 )
-texture = ExtResource( 15 )
+texture = ExtResource( 18 )
+
+[node name="blue" type="Sprite" parent="seals"]
+use_parent_material = true
+position = Vector2( 408, 388.218 )
+scale = Vector2( 0.35, 0.35 )
+texture = ExtResource( 4 )
+
+[node name="green" type="Sprite" parent="seals"]
+modulate = Color( 0.596078, 1, 0.592157, 1 )
+position = Vector2( 466.379, 387.308 )
+scale = Vector2( 0.35, 0.35 )
+texture = ExtResource( 16 )
 
 [node name="audio" type="Node2D" parent="."]
 
 [node name="negative" type="AudioStreamPlayer2D" parent="audio"]
-stream = ExtResource( 7 )
+stream = ExtResource( 20 )
 
 [node name="positive" type="AudioStreamPlayer2D" parent="audio"]
-stream = ExtResource( 5 )
+stream = ExtResource( 8 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
+stream = ExtResource( 9 )
 autoplay = true
 
-[node name="bars" parent="." instance=ExtResource( 24 )]
+[node name="bars" parent="." instance=ExtResource( 22 )]
 margin_left = 0.667481
 margin_top = 0.252547
 margin_right = 0.66748
