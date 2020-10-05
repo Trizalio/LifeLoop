@@ -18,14 +18,19 @@ func _ready():
 
 
 func _on_Start_pressed():
-	print('_on_Start_pressed')
-	var player = get_node("AnimationPlayer")
-	if not player.is_playing():
+	if not SceneChanger.is_changing_scene():
 		sound.play()
-		player.play('fade')
-		print("start_game")
-	
-func faded():
-	print('faded')
-	GameStatus.start_new_game()
-	SceneChanger.goto_scene("res://scenes/alarm.tscn")
+		SceneChanger.goto_scene("res://scenes/alarm.tscn", 2)
+#
+#func _on_Start_pressed():
+#	print('_on_Start_pressed')
+#	var fader = get_node("fader")
+#	if not fader.is_fading():
+#		sound.play()
+#		fader.fade(2)
+#		print("start_game")
+#
+#func faded():
+#	print('faded')
+#	GameStatus.start_new_game()
+#	SceneChanger.goto_scene("res://scenes/alarm.tscn")

@@ -3,6 +3,7 @@
 [ext_resource path="res://scripts/main.gd" type="Script" id=1]
 [ext_resource path="res://art/audio/tick-tock.wav" type="AudioStream" id=2]
 [ext_resource path="res://fonts/PressStart2P-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://scenes/fader.tscn" type="PackedScene" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 3 )
@@ -12,35 +13,6 @@ action = "ui_accept"
 
 [sub_resource type="ShortCut" id=3]
 shortcut = SubResource( 2 )
-
-[sub_resource type="Animation" id=4]
-length = 2.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("Fader:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 0.0666667, 0.0666667, 0.0666667, 0 ), Color( 0.0666667, 0.0666667, 0.0666667, 1 ) ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 2 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "faded"
-} ]
-}
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
@@ -87,22 +59,8 @@ shortcut = SubResource( 3 )
 text = "Press any button to start"
 flat = true
 
-[node name="Fader" type="ColorRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -1.7818
-margin_top = 1.7818
-margin_right = -1.7818
-margin_bottom = 1.7818
-mouse_filter = 2
-color = Color( 0.0666667, 0.0666667, 0.0666667, 0 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/fade = SubResource( 4 )
-
 [node name="tick_tack_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )
+
+[node name="fader" parent="." instance=ExtResource( 4 )]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/Start" to="." method="_on_Start_pressed"]
