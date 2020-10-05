@@ -1,16 +1,5 @@
 extends MarginContainer
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-#onready var money_bar = 
-#export (float) var money = 100 setget _set_money
-#
-#func _set_money(new_money):
-#	money_bar
-#	pass
-
 export (Color) var color_on_decrease = Color(1, 0, 0, 1)
 export (Color) var color_on_increase = Color(0, 1, 0, 1)
 var normal_color = Color(1, 1, 1, 1)
@@ -22,13 +11,13 @@ func merge_colors(base_color: Color, hint_color: Color, hint_power: float) -> Co
 func update_bar_value(bar: ProgressBar, new_value: float):
 	var old_value = bar.value
 	bar.value = new_value
-	var delta = clamp((new_value - old_value) / 10, -1, 1)
+	var delta = clamp((new_value - old_value) / 30, -0.5, 0.5)
 	
 	var color_modulate = bar.modulate
 	if delta > 0:
-		bar.modulate = merge_colors(color_modulate, color_on_increase, delta)
+		bar.modulate = merge_colors(color_modulate, color_on_increase, 0.5 + delta)
 	elif delta < 0:
-		bar.modulate = merge_colors(color_modulate, color_on_decrease, -delta)
+		bar.modulate = merge_colors(color_modulate, color_on_decrease, 0.5 - delta)
 
 func render():
 	update_bar_value($vbox/bars/money, GameStatus.money)
@@ -41,8 +30,6 @@ func _ready():
 
 func return_bar_modulate(bar: ProgressBar, delta: float):
 	var keep_factor = pow(color_keep_factor, delta)
-	print('keep_factor:', keep_factor)
-#	keep_factor = 0.5
 	bar.modulate = merge_colors(normal_color, bar.modulate, keep_factor)
 
 func _process(delta):
