@@ -46,7 +46,6 @@ var office_items = [
 var name_to_office_item = {}
 
 var time_steps_to_buildings = {}
-var day_to_buildings = {}
 
 
 class ResourseChange:
@@ -90,31 +89,23 @@ func prepare_changes():
 func _ready():
 	prepare_changes()
 	time_steps_to_buildings = {
-		18: ['home', 'bar', 'grocery_store', ],
-		19: ['home', 'bar', 'grocery_store', ],
-		20: ['home', 'bar'],
-		21: ['home', 'bar'],
-		22: ['home', 'bar'],
-		23: ['home'],
+		18: ['home', 'grocery_store', 'park', 'gym', 'clothing_store', 'jewelry_store'],
+		19: ['home', 'grocery_store', 'park', 'gym', 'clothing_store', 'jewelry_store'],
+		20: ['home', 'grocery_store', 'park', 'gym', 'clothing_store'],
+		21: ['home', 'grocery_store', 'park', 'gym', 'bar'],
+		22: ['home', 'park', 'gym', 'bar', 'strip_club'],
+		23: ['home', 'park', 'bar', 'strip_club'],
 		24: ['home'],
 	}
+	
 	time_steps_to_home_items = {
-		18: ['bed', 'bookshelf'],
-		19: ['bed', 'bookshelf'],
-		20: ['bed', 'bookshelf'],
-		21: ['bed', 'bookshelf'],
-		22: ['bed', 'bookshelf'],
-		23: ['bed'],
+		18: ['tv', 'crack', 'bed', 'bottle', 'bookshelf', 'sink'],
+		19: ['tv', 'crack', 'bed', 'bottle', 'bookshelf', 'sink'],
+		20: ['tv', 'crack', 'bed', 'bottle', 'bookshelf', 'sink'],
+		21: ['tv', 'crack', 'bed', 'bottle', 'bookshelf', 'sink'],
+		22: ['tv', 'crack', 'bed', 'bottle', 'bookshelf', 'sink'],
+		23: ['tv', 'crack', 'bed', 'bottle', 'bookshelf', 'sink'],
 		24: ['bed'],
-	}
-	day_to_buildings = {
-		1: ['home', 'bar', 'grocery_store', ],
-		2: ['home', 'bar'],
-	#	1: ['bar'],
-	#	2: ['grocery_store', 'park'],
-	#	3: ['grocery_store', 'park', 'gym'],
-	#	4: ['grocery_store', 'park', 'gym', 'bar', 'clothing_store'],
-	#	5: ['grocery_store', 'park', 'gym', 'bar', 'clothing_store', 'jewelry_store', 'strip_club'],
 	}
 	
 func start_new_game():
@@ -220,7 +211,7 @@ func on_building_used(building_name: String):
 												
 func used_home_item(item_name):
 	if item_name == 'bed':
-		go_to_office()
+		start_new_day()
 		return
 	var item_data: ResourseChange = name_to_home_items[item_name]
 	modify_resourses(item_data)

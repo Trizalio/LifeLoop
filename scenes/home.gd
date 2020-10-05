@@ -45,5 +45,11 @@ func limit_selectable_objects_to(object_names = null):
 		var object = items[i]
 		if object_names == null or object.name in object_names:
 			new_scene_objects.append(object)
+		else:
+			object.use_parent_material = false
 	scene_objects = new_scene_objects
-	select_object(int(len(scene_objects) / 2))
+	var old_selected_object_index = scene_objects.find(selected_object)
+	if old_selected_object_index >= 0:
+		select_object(old_selected_object_index)
+	else:
+		select_object(int(len(scene_objects) / 2))
