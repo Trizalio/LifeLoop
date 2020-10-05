@@ -73,11 +73,11 @@ func use_seal():
 	get_next_sheet()
 	
 func check_seal(seal_color: String):
-	if seal_color == 'blue' and sheet.frame in [0, 1]:
+	if seal_color == 'blue' and sheet.frame in [0]:
 		return true
-	if seal_color == 'green' and sheet.frame in [2, 3, 4]:
+	if seal_color == 'green' and sheet.frame in [1]:
 		return true
-	if seal_color == 'red' and sheet.frame in [5, 6, 7]:
+	if seal_color == 'red' and sheet.frame in [2]:
 		return true		
 	
 func get_next_sheet():
