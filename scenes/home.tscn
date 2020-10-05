@@ -19,11 +19,6 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 1 ) ],
-"loop": true,
-"name": "day",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 3 ), ExtResource( 10 ) ],
 "loop": true,
 "name": "night",
@@ -32,6 +27,11 @@ animations = [ {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
 "name": "evening",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "day",
 "speed": 5.0
 } ]
 

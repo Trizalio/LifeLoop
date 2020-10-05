@@ -26,7 +26,7 @@ outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=3]
 content_margin_left = 0.0
 content_margin_right = 0.0
 content_margin_top = 0.0
@@ -42,7 +42,7 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=4]
 content_margin_left = 0.0
 content_margin_right = 0.0
 content_margin_top = 0.0
@@ -110,11 +110,11 @@ __meta__ = {
 
 [node name="family" type="ProgressBar" parent="vbox/bars"]
 margin_left = 254.0
-margin_right = 505.0
+margin_right = 504.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 50, 15 )
 size_flags_horizontal = 3
-custom_styles/fg = SubResource( 4 )
+custom_styles/fg = SubResource( 3 )
 value = 50.0
 percent_visible = false
 
@@ -132,12 +132,12 @@ __meta__ = {
 }
 
 [node name="stress" type="ProgressBar" parent="vbox/bars"]
-margin_left = 509.0
+margin_left = 508.0
 margin_right = 760.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 50, 15 )
 size_flags_horizontal = 3
-custom_styles/fg = SubResource( 3 )
+custom_styles/fg = SubResource( 4 )
 value = 40.0
 percent_visible = false
 __meta__ = {
