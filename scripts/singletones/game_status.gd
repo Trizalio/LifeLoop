@@ -17,7 +17,7 @@ var buildings = [
 	ResourseChange.new('gym', -small_effect, small_effect, no_effect),
 	ResourseChange.new('bar', -medium_effect, medium_effect, -small_effect),
 	ResourseChange.new('clothing_store', -medium_effect, no_effect, medium_effect),
-	ResourseChange.new('stripclub', -strong_effect, strong_effect, -medium_effect),
+	ResourseChange.new('strip_club', -strong_effect, strong_effect, -medium_effect),
 	ResourseChange.new('jewelry_store', -strong_effect, no_effect, strong_effect),
 ]
 var name_to_building = {}
