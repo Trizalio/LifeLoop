@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://art/office/pc.png" type="Texture" id=1]
 [ext_resource path="res://art/office/lamp.png" type="Texture" id=2]
@@ -6,16 +6,36 @@
 [ext_resource path="res://scenes/glow.tres" type="Material" id=4]
 [ext_resource path="res://scenes/office.gd" type="Script" id=5]
 [ext_resource path="res://art/office/office.png" type="Texture" id=6]
+[ext_resource path="res://art/office/office_light.png" type="Texture" id=7]
 [ext_resource path="res://art/audio/office.wav" type="AudioStream" id=8]
 [ext_resource path="res://art/office/printer.png" type="Texture" id=9]
 [ext_resource path="res://art/office/whiteboard_office.png" type="Texture" id=10]
 [ext_resource path="res://scenes/bars.tscn" type="PackedScene" id=11]
 [ext_resource path="res://art/audio/negative.wav" type="AudioStream" id=12]
 
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "lighting",
+"speed": 5.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "New Anim",
+"speed": 5.0
+} ]
+
 [node name="office" type="Node"]
 script = ExtResource( 5 )
 
 [node name="background" type="ColorRect" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.0666667, 0.0666667, 0.0666667, 1 )
@@ -23,9 +43,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -200, 0 )
-texture = ExtResource( 6 )
+[node name="Sprite" type="AnimatedSprite" parent="."]
+position = Vector2( -212, -9 )
+frames = SubResource( 1 )
+animation = "lighting"
 centered = false
 
 [node name="items" type="Node2D" parent="."]
@@ -45,7 +66,7 @@ scale = Vector2( 0.82437, 0.82437 )
 texture = ExtResource( 1 )
 
 [node name="lamp" type="Sprite" parent="items"]
-position = Vector2( 423.526, 139.142 )
+position = Vector2( 413.526, 130.142 )
 scale = Vector2( 0.826482, 0.826482 )
 texture = ExtResource( 2 )
 
@@ -64,3 +85,7 @@ stream = ExtResource( 8 )
 autoplay = true
 
 [node name="bars" parent="." instance=ExtResource( 11 )]
+margin_left = 3.66742
+margin_top = -5.33484
+margin_right = 3.66742
+margin_bottom = -5.33484
