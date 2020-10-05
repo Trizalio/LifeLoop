@@ -249,15 +249,18 @@ func modify_resourses(resource_change: ResourseChange):
 	stress += resource_change.stress_effect
 	family += resource_change.family_effect
 	if money < 0:
-		game_over('no_money')
+		game_over('money')
 	if stress < 0:
-		game_over('died')
+		game_over('stress')
 	if family < 0:
-		game_over('lost_family')
+		game_over('family')
 	emit_signal("resources_changed")
 
 func game_over(ending_name: String):
 	SceneChanger.goto_scene("res://scenes/epilogue.tscn")
+	yield(SceneChanger, "scene_changed")
+	var epilogue = get_node("/root/epilogue")
+	epilogue.set_reason(ending_name)
 
 func came_home():
 	SceneChanger.goto_scene("res://scenes/home.tscn")

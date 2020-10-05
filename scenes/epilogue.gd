@@ -2,6 +2,9 @@ extends Node
 
 func _ready():
 	pass
+	
+func set_reason(resaon_name: String):
+	$epilogue_bg.animation = resaon_name
 
 func _input(event):
 #	print(event)
