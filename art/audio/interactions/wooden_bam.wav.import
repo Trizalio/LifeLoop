@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/wooden_bam.wav-983d948802f369a0dfe56e076d24d955.sample"
+
+[deps]
+
+source_file="res://art/audio/interactions/wooden_bam.wav"
+dest_files=[ "res://.import/wooden_bam.wav-983d948802f369a0dfe56e076d24d955.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

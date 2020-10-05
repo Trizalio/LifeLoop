@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/poink.wav-b4c0f89b913e4d2bc5478d9b46c398ab.sample"
+
+[deps]
+
+source_file="res://art/audio/interactions/poink.wav"
+dest_files=[ "res://.import/poink.wav-b4c0f89b913e4d2bc5478d9b46c398ab.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

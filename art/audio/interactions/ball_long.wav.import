@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ball_long.wav-fd8f1d2e28e49fca509f5e9b1d6ee766.sample"
+
+[deps]
+
+source_file="res://art/audio/interactions/ball_long.wav"
+dest_files=[ "res://.import/ball_long.wav-fd8f1d2e28e49fca509f5e9b1d6ee766.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
