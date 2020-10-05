@@ -64,15 +64,6 @@ position = Vector2( -429.353, 72.7307 )
 scale = Vector2( 0.996016, 0.996016 )
 stream = ExtResource( 13 )
 
-[node name="ball" type="Sprite" parent="items"]
-position = Vector2( 649.361, 324.872 )
-texture = ExtResource( 3 )
-
-[node name="sound" type="AudioStreamPlayer2D" parent="items/ball"]
-position = Vector2( -703.885, -94.257 )
-scale = Vector2( 0.821086, 0.821086 )
-stream = ExtResource( 14 )
-
 [node name="lamp" type="Sprite" parent="items"]
 position = Vector2( 413.526, 130.142 )
 scale = Vector2( 0.826482, 0.826482 )
@@ -87,6 +78,15 @@ stream = ExtResource( 15 )
 position = Vector2( 631.897, 133.411 )
 scale = Vector2( 0.844758, 0.959502 )
 texture = ExtResource( 10 )
+
+[node name="ball" type="Sprite" parent="items"]
+position = Vector2( 649.361, 324.872 )
+texture = ExtResource( 3 )
+
+[node name="sound" type="AudioStreamPlayer2D" parent="items/ball"]
+position = Vector2( -703.885, -94.257 )
+scale = Vector2( 0.821086, 0.821086 )
+stream = ExtResource( 14 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )

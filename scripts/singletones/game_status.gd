@@ -24,12 +24,12 @@ var name_to_building = {}
 
 
 var home_items = [
-	ResourseChange.new('bookshelf', no_effect, no_effect, no_effect),
-	ResourseChange.new('tv', no_effect, no_effect, no_effect),
-	ResourseChange.new('crack', no_effect, no_effect, no_effect),
+	ResourseChange.new('bookshelf', no_effect, small_effect, -small_effect),
+	ResourseChange.new('tv', no_effect, small_effect, -small_effect),
+	ResourseChange.new('crack', no_effect, -small_effect, small_effect),
 	ResourseChange.new('bed', no_effect, no_effect, no_effect),
-	ResourseChange.new('bottle', -small_effect, small_effect, no_effect),
-	ResourseChange.new('sink', no_effect, no_effect, no_effect),
+	ResourseChange.new('bottle', -small_effect, medium_effect, -small_effect),
+	ResourseChange.new('sink', no_effect, -medium_effect, medium_effect),
 ]
 var name_to_home_items = {}
 var time_steps_to_home_items = {}
@@ -38,11 +38,11 @@ var time_steps_to_home_items = {}
 var office_items = [
 	ResourseChange.new('correct_sheet', money_per_sheet, stress_per_sheet, no_effect),
 	ResourseChange.new('mistake_sheet', no_effect, stress_per_mistake, no_effect),
-	ResourseChange.new('printer', no_effect, no_effect, no_effect),
-	ResourseChange.new('pc', no_effect, no_effect, no_effect),
-	ResourseChange.new('lamp', no_effect, no_effect, no_effect),
+	ResourseChange.new('printer', 1, no_effect, no_effect),
+	ResourseChange.new('pc', no_effect, small_effect, no_effect),
+	ResourseChange.new('lamp', no_effect, 1, no_effect),
 	ResourseChange.new('whiteboard', no_effect, no_effect, no_effect),
-	ResourseChange.new('ball', no_effect, no_effect, no_effect),
+	ResourseChange.new('ball', no_effect, 1, no_effect),
 ]
 var name_to_office_item = {}
 
@@ -135,7 +135,7 @@ func end_game():
 	pass
 
 #var seconds_in_office = 30
-var day_start_time_step = 9
+var day_start_time_step = 8
 var current_time_step = day_start_time_step 
 var final_time_step_in_office = 18
 var time_steps_in_office = 9
@@ -156,16 +156,27 @@ func increment_time():
 		var home = get_node("/root/home")
 		home.limit_selectable_objects_to(get_home_items())
 	if location == 'city':
-		var objects = []
-		if current_time_step in time_steps_to_buildings:
-			objects = time_steps_to_buildings[current_time_step]
 		var city = get_node("/root/city")
-		city.limit_selectable_objects_to(objects)
+		city.limit_selectable_objects_to(get_office_items())
 	if location == 'office':
 		if current_time_step < final_time_step_in_office:
 			pass
 		elif current_time_step == final_time_step_in_office:
 			gone_from_office()
+
+func get_office_items():
+	var objects = []
+	if current_time_step in time_steps_to_buildings:
+		objects = time_steps_to_buildings[current_time_step]
+	if 'ball' in objects:
+		if name_to_home_items['ball'].day_times_used > 0:
+			objects.erase('ball')
+	if 'printer' in objects:
+		if name_to_home_items['printer'].day_times_used > 0:
+			objects.erase('printer')
+	print('get_office_items: ', objects)
+	if objects:
+		return objects
 
 func get_home_items():
 	var objects = []
@@ -183,6 +194,7 @@ func return_to_office():
 	SceneChanger.goto_scene("res://scenes/office.tscn")
 
 func got_to_office():
+	increment_time()
 	get_node('/root/office').limit_selectable_objects_to([
 		'lamp', 'printer', 'whiteboard', 'pc', 'ball'
 	])
@@ -281,8 +293,5 @@ func gone_from_office():
 	var city = get_node("/root/city")
 	city.connect("building_used", self, "on_building_used")
 	print('city.connect("building_used", self, "on_building_used")')
-	var objects = []
-	if current_time_step in time_steps_to_buildings:
-		objects = time_steps_to_buildings[current_time_step]
-	city.start_at_office(objects)
+	city.start_at_office(get_office_items())
 	
