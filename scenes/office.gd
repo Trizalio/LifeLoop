@@ -24,10 +24,11 @@ func _input(event):
 				SceneChanger.goto_scene("res://scenes/work.tscn")
 		
 func _ready():
+	GameStatus.set_location(self.name)
 	selected_object_index = 0
 	limit_selectable_objects_to()
 	GameStatus.got_to_office()
-	GameStatus.set_office_time($time)
+#	GameStatus.set_office_time($time)
 
 func limit_selectable_objects_to(object_names = null):
 	print('limit_selectable_objects_to: ', object_names)

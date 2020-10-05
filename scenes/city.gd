@@ -26,8 +26,8 @@ export (float) var marker_select_range = 100
 export (float) var marker_glow_power = 5
 export (float) var default_marker_glow_power = 0.5
 
-func come_to_office(buildings_to_act):
-	show_buildings(buildings_to_act)
+func come_to_office(buildings_to_act = null):
+	limit_selectable_objects_to(buildings_to_act)
 			
 #	var animation = get_node("animation")
 #	animation.play("player_to_work")
@@ -42,16 +42,16 @@ func come_to_office(buildings_to_act):
 	yield(player, 'destination_reached')
 	emit_signal("came_to_office")
 
-func show_buildings(buildings_to_act):
+func limit_selectable_objects_to(object_names = null):
 	for i in len(marker_nodes):
 		var node: Node2D = marker_nodes[i]
-		var active = int(node.name in buildings_to_act)
+		var active = int(object_names == null or node.name in object_names)
 		node.modulate.a = 0.3 + 0.7 * active
 		node.material.set_shader_param("power", default_marker_glow_power * active)
 
-func start_at_office(buildings_to_act):
+func start_at_office(buildings_to_act = null):
 	player.blink_to_destination(work_position)
-	show_buildings(buildings_to_act)
+	limit_selectable_objects_to(buildings_to_act)
 
 func select_nearest_building():
 	var nearest_marker = null
@@ -81,6 +81,7 @@ func select_nearest_building():
 		selected_marker = null
 #
 func _ready():
+	GameStatus.set_location(self.name)
 	marker_nodes = $map/markers.get_children()
 	player = $map/player
 	

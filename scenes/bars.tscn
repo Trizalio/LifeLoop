@@ -1,7 +1,12 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/bars.gd" type="Script" id=1]
 [ext_resource path="res://fonts/PressStart2P-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://fonts/digital-7.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=5]
+size = 52
+font_data = ExtResource( 3 )
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 0.0
@@ -80,6 +85,27 @@ margin_top = 20.0
 margin_right = 780.0
 margin_bottom = 580.0
 alignment = 2
+
+[node name="time" type="HBoxContainer" parent="vbox"]
+margin_right = 760.0
+margin_bottom = 29.0
+alignment = 2
+
+[node name="label" type="Label" parent="vbox/time"]
+margin_left = 651.0
+margin_right = 760.0
+margin_bottom = 29.0
+custom_fonts/font = SubResource( 5 )
+text = "08:00"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="filler" type="Control" parent="vbox"]
+margin_top = 33.0
+margin_right = 760.0
+margin_bottom = 541.0
+size_flags_vertical = 3
 
 [node name="bars" type="HBoxContainer" parent="vbox"]
 margin_top = 545.0

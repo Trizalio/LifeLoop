@@ -43,7 +43,7 @@ func _ready():
 	select_object(2)
 	select_rules()
 	get_next_sheet()
-	GameStatus.set_office_time($time)
+#	GameStatus.set_office_time($time)
 	
 func select_object(new_object_index: int):
 	new_object_index = new_object_index % len(scene_objects)

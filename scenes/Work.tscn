@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://scenes/work.gd" type="Script" id=1]
 [ext_resource path="res://scenes/glow.tres" type="Material" id=2]
@@ -24,7 +24,6 @@
 [ext_resource path="res://art/seals/blue.png" type="Texture" id=22]
 [ext_resource path="res://art/seals/red.png" type="Texture" id=23]
 [ext_resource path="res://scenes/bars.tscn" type="PackedScene" id=24]
-[ext_resource path="res://scenes/work_time.tscn" type="PackedScene" id=25]
 [ext_resource path="res://art/sheets/arrows_red3.png" type="Texture" id=26]
 
 [sub_resource type="SpriteFrames" id=1]
@@ -221,10 +220,6 @@ stream = ExtResource( 5 )
 [node name="bars" parent="." instance=ExtResource( 24 )]
 margin_left = 3.49585
 margin_right = 3.49585
-
-[node name="time" parent="." instance=ExtResource( 25 )]
-margin_left = 680.0
-margin_right = 791.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )

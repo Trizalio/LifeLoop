@@ -31,6 +31,7 @@ var home_items = [
 	ResourseChange.new('sink', no_effect, no_effect, no_effect),
 ]
 var name_to_home_items = {}
+var time_steps_to_home_items = {}
 
 
 var office_items = [
@@ -44,6 +45,7 @@ var office_items = [
 ]
 var name_to_office_item = {}
 
+var time_steps_to_buildings = {}
 var day_to_buildings = {}
 
 
@@ -64,6 +66,7 @@ class ResourseChange:
 
 #var ResourseBars = preload("res://scenes/bars.tscn")
 signal resources_changed
+signal time_step_changed
 var money: float = 50
 var stress: float = 50
 var family: float = 50
@@ -86,6 +89,24 @@ func prepare_changes():
 
 func _ready():
 	prepare_changes()
+	time_steps_to_buildings = {
+		18: ['home', 'bar', 'grocery_store', ],
+		19: ['home', 'bar', 'grocery_store', ],
+		20: ['home', 'bar'],
+		21: ['home', 'bar'],
+		22: ['home', 'bar'],
+		23: ['home'],
+		24: ['home'],
+	}
+	time_steps_to_home_items = {
+		18: ['bed', 'bookshelf'],
+		19: ['bed', 'bookshelf'],
+		20: ['bed', 'bookshelf'],
+		21: ['bed', 'bookshelf'],
+		22: ['bed', 'bookshelf'],
+		23: ['bed'],
+		24: ['bed'],
+	}
 	day_to_buildings = {
 		1: ['home', 'bar', 'grocery_store', ],
 		2: ['home', 'bar'],
@@ -116,17 +137,42 @@ func try_find(location: String):
 		node.print_tree()
 	
 
-var seconds_in_office = 30
-var time_steps = 9
-var day_start_time = 9
-var current_time_step = 0
+#var seconds_in_office = 30
+var day_start_time_step = 9
+var current_time_step = day_start_time_step 
+var final_time_step_in_office = 18
+var time_steps_in_office = 9
+
 var got_to_office_from_work = false
 
 var current_day = 0
+var location = null
 
-func set_office_time(target: Label):
-	target.text = "%0*d:00" % [2, day_start_time + current_time_step]
-	
+func set_location(location_name: String):
+	print('set_location', location_name)
+	location = location_name
+
+func increment_time():
+	current_time_step += 1
+	emit_signal('time_step_changed')
+	if current_time_step < final_time_step_in_office:
+		pass
+	elif current_time_step == final_time_step_in_office:
+		gone_from_office()
+	else:
+		if location == 'city':
+			var objects = []
+			if current_time_step in time_steps_to_buildings:
+				objects = time_steps_to_buildings[current_time_step]
+			var city = get_node("/root/city")
+			city.limit_selectable_objects_to(objects)
+		if location == 'home':
+			var objects = []
+			if current_time_step in time_steps_to_home_items:
+				objects = time_steps_to_home_items[current_time_step]
+			var home = get_node("/root/home")
+			home.limit_selectable_objects_to(objects)
+			
 func return_to_office():
 	got_to_office_from_work = true
 	SceneChanger.goto_scene("res://scenes/office.tscn")
@@ -135,22 +181,26 @@ func got_to_office():
 	get_node('/root/office').limit_selectable_objects_to([
 		'lamp', 'printer', 'whiteboard', 'pc'
 	])
-	if got_to_office_from_work:
-		got_to_office_from_work = false
-		return
-	current_day += 1
-	current_time_step = 0
-	
-	var seconds_per_time_step = seconds_in_office / time_steps
-	while current_time_step < time_steps:
-		var time_label: Label = get_node('/root/office/time')
-		if time_label == null:
-			time_label = get_node('/root/work/time')
-		set_office_time(time_label)
-		yield(get_tree().create_timer(seconds_per_time_step), "timeout")
-		current_time_step += 1
-	gone_from_office()
+#	if got_to_office_from_work:
+#		got_to_office_from_work = false
+#		return
+#	current_day += 1
+#	current_time_step = 0
+#
+#	var seconds_per_time_step = seconds_in_office / time_steps
+#	while current_time_step < time_steps:
+#		var time_label: Label = get_node('/root/office/time')
+#		if time_label == null:
+#			time_label = get_node('/root/work/time')
+#		set_office_time(time_label)
+#		yield(get_tree().create_timer(seconds_per_time_step), "timeout")
+#		current_time_step += 1
 
+func start_new_day():
+	current_time_step = day_start_time_step
+	emit_signal('time_step_changed')
+	go_to_office()
+	
 func go_to_office():
 	SceneChanger.goto_scene("res://scenes/city.tscn")
 	yield(SceneChanger, "scene_changed")
@@ -166,6 +216,7 @@ func on_building_used(building_name: String):
 		return
 	var building_data: ResourseChange = name_to_building[building_name]
 	modify_resourses(building_data)
+	increment_time()
 												
 func used_home_item(item_name):
 	if item_name == 'bed':
@@ -173,10 +224,12 @@ func used_home_item(item_name):
 		return
 	var item_data: ResourseChange = name_to_home_items[item_name]
 	modify_resourses(item_data)
+	increment_time()
 												
 func used_office_item(item_name):
 	var item_data: ResourseChange = name_to_office_item[item_name]
 	modify_resourses(item_data)
+	increment_time()
 
 func modify_resourses(resource_change: ResourseChange):
 	print('modify_resourses', resource_change.title, 
@@ -201,13 +254,17 @@ func came_home():
 	SceneChanger.goto_scene("res://scenes/home.tscn")
 	yield(SceneChanger, "scene_changed")
 	var home = get_node("/root/home")
-	home.limit_selectable_objects_to(['bed', 'bottle', 'sink', 'crack', 'bookshelf', 'tv'])
+	var objects = []
+	if current_time_step in time_steps_to_home_items:
+		objects = time_steps_to_home_items[current_time_step]
+	home.limit_selectable_objects_to(objects)
 
 func work_done(result_is_correct):
 	if result_is_correct:
 		modify_resourses(name_to_office_item['correct_sheet'])
 	else:
 		modify_resourses(name_to_office_item['mistake_sheet'])
+	increment_time()
 
 func gone_from_office():
 	SceneChanger.goto_scene("res://scenes/city.tscn")
@@ -215,5 +272,8 @@ func gone_from_office():
 	var city = get_node("/root/city")
 	city.connect("building_used", self, "on_building_used")
 	print('city.connect("building_used", self, "on_building_used")')
-	city.start_at_office(day_to_buildings[current_day])
+	var objects = []
+	if current_time_step in time_steps_to_buildings:
+		objects = time_steps_to_buildings[current_time_step]
+	city.start_at_office(objects)
 	

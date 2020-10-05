@@ -22,14 +22,18 @@ func update_bar_value(bar: ProgressBar, new_value: float, glow_on_change: bool =
 	elif delta < 0:
 		bar.modulate = merge_colors(color_modulate, color_on_decrease, 0.5 - delta)
 
-func render(glow_on_change: bool = true):
+func render_bars(glow_on_change: bool = true):
 	update_bar_value($vbox/bars/money, GameStatus.money, glow_on_change)
 	update_bar_value($vbox/bars/stress, GameStatus.stress, glow_on_change)
 	update_bar_value($vbox/bars/family, GameStatus.family, glow_on_change)
-# Called when the node enters the scene tree for the first time.
+	
+func render_time():
+	$vbox/time/label.text = "%0*d:00" % [2, GameStatus.current_time_step]
 func _ready():
-	render(false)
-	GameStatus.connect("resources_changed", self, 'render')
+	render_bars(false)
+	render_time()
+	GameStatus.connect("resources_changed", self, 'render_bars')
+	GameStatus.connect("time_step_changed", self, 'render_time')
 
 func return_bar_modulate(bar: ProgressBar, delta: float):
 	var keep_factor = pow(color_keep_factor, delta)

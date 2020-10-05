@@ -21,13 +21,15 @@ func _input(event):
 				sound.play()
 		
 func _ready():
+	GameStatus.set_location(self.name)
 	selected_object_index = 0
 	limit_selectable_objects_to()
 
 func select_object(new_object_index: int):
 	print('select_object', new_object_index)
 	new_object_index = new_object_index % len(scene_objects)
-	selected_object = scene_objects[selected_object_index]
+	if selected_object_index < len(scene_objects):
+		selected_object = scene_objects[selected_object_index]
 	if selected_object != null:
 		selected_object.use_parent_material = false
 		
